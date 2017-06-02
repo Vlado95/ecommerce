@@ -13,24 +13,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.boutique.admin.entity.User;
 import com.boutique.dao.IDaoUser;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"/jpaSpringConf.xml"})
+@ContextConfiguration(locations = { "/jpaSpringConf.xml" })
 public class DaoUserTest {
 
 	@Autowired
-	private IDaoUser daoUser;  // à tester
-	
+	private IDaoUser daoUser; // ? tester
+
 	@Before
 	public void setUp() throws Exception {
 	}
 
 	@Test
 	public void testSelectById() {
-		User user=daoUser.selectById(1);
-		Assert.assertTrue( user.getId() == 1);
+		User user = daoUser.selectById(1);
+		Assert.assertTrue(user.getId() == 1);
 		System.out.println(user.toString());
-		
+
 	}
 
 	@Test

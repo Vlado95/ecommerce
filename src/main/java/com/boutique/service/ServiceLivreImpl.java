@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.boutique.dao.IDao;
 import com.boutique.entity.Livre;
+
 @Service
 public class ServiceLivreImpl implements IService<Livre> {
 
 	@Autowired
 	private IDao<Livre> daoLivre;
-	
+
 	@Override
 	public Livre rechercherParId(int id) {
 		return daoLivre.selectById(id);
@@ -36,13 +37,13 @@ public class ServiceLivreImpl implements IService<Livre> {
 	@Override
 	public void maj(Livre livre) {
 		daoLivre.update(livre);
-		
+
 	}
 
 	@Override
 	public void supprimer(int id) {
 		daoLivre.delete(id);
-		
+
 	}
 
 }

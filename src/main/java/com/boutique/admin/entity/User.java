@@ -1,6 +1,8 @@
 package com.boutique.admin.entity;
+
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 //import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 @NamedQueries({ @NamedQuery(name = "user.all", query = "SELECT u FROM User u"),
-	@NamedQuery(name = "user.search", query = "SELECT u FROM User u WHERE u.nom like ?1"),
-	@NamedQuery(name = "user.byEmailPwd", query = "SELECT u FROM User u WHERE u.email = ?1 AND u.password = ?2")})
+		@NamedQuery(name = "user.search", query = "SELECT u FROM User u WHERE u.nom like ?1"),
+		@NamedQuery(name = "user.byEmailPwd", query = "SELECT u FROM User u WHERE u.email = ?1 AND u.password = ?2") })
 public class User implements Serializable {
 	/**
 	 * 
@@ -26,6 +28,7 @@ public class User implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_user")
 	private Integer id;
 
 	/**
@@ -46,6 +49,7 @@ public class User implements Serializable {
 	/**
 	 * Description of the property password.
 	 */
+	@Column(name = "pwd")
 	private String password;
 
 	// Start of user code (user defined attributes for User)
@@ -63,13 +67,13 @@ public class User implements Serializable {
 
 	// Start of user code (user defined methods for User)
 
-	public User(Integer id, String nom, String prenom, String email, String password) {
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.password = password;
-	}
+	//	public User(Integer id, String nom, String prenom, String email, String password) {
+	//		this.id = id;
+	//		this.nom = nom;
+	//		this.prenom = prenom;
+	//		this.email = email;
+	//		this.password = password;
+	//	}
 
 	// End of user code
 	/**
@@ -156,6 +160,5 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + "]";
 	}
-
 
 }

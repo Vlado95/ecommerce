@@ -14,21 +14,12 @@ CREATE TABLE IF NOT EXISTS users (
   prenom VARCHAR(45) NOT NULL,
   email VARCHAR(45) NOT NULL,
   pwd  VARCHAR(45) NOT NULL,
+  role VARCHAR(20) NOT NULL,
   enabled TINYINT(1) NOT NULL,
   PRIMARY KEY (id_user),
   UNIQUE INDEX email_UNIQUE (email ASC))
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
-
-
-CREATE TABLE IF NOT EXISTS roles (
-  id_role INT(11) NOT NULL AUTO_INCREMENT,
-  id_user INT(11) NOT NULL,
-  role_name VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id_role),
-  CONSTRAINT fk_role_user
-    FOREIGN KEY (id_user) REFERENCES users (id_user))
-ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
 
@@ -40,7 +31,6 @@ BEGIN
 	-- Lever temporairement les contraintes d'intégrité
 	SET FOREIGN_KEY_CHECKS=0;
 	TRUNCATE users;
-	TRUNCATE roles;
 	-- Remettre les contraintes d'integrite
 	SET FOREIGN_KEY_CHECKS=1;
 
@@ -53,16 +43,10 @@ BEGIN
 		START TRANSACTION;
         
 		-- contenu de base
-	INSERT INTO users(id_user,nom, prenom, email,pwd,enabled) VALUES
-		(1, 'Haddock', 'Archibald', 'haddock@moulinsart.be','karara',1),
-		(2,'Castafiore', 'Bianca', 'bianca.castafiore@scala.it','kamiri',1),
-		(3, 'Tournesol', 'Tryphon', 'tournesol@moulinsart.be','milou',1);
-
-	INSERT INTO roles (id_role, id_user, role_name) VALUES
-		(1, 1,'ROLE_SUPER_ADMIN' ),
-		(2, 1,'ROLE_ADMIN'),
-		(3, 2,'ROLE_ADMIN'),
-		(4, 3,'ROLE_USER');
+	INSERT INTO users(id_user,nom, prenom, email,pwd,role,enabled) VALUES
+		(1, 'Haddock', 'Archibald', 'haddock@moulinsart.be','karara','ROLE_ADMIN',1),
+		(2,'Castafiore', 'Bianca', 'bianca.castafiore@scala.it','kamiri','ROLE_USER',1),
+		(3, 'Tournesol', 'Tryphon', 'tournesol@moulinsart.be','milou','ROLE_USER',1);
 
 	  COMMIT;
 	END;

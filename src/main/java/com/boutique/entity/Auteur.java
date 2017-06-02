@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "auteur")
 @NamedQueries({ @NamedQuery(name = "auteur.all", query = "SELECT a FROM Auteur a"),
-	@NamedQuery(name = "auteur.search", query = "SELECT a FROM Auteur a WHERE a.nom like ?1")})
+		@NamedQuery(name = "auteur.search", query = "SELECT a FROM Auteur a WHERE a.nom like ?1") })
 public class Auteur extends Produit implements Serializable {
 
 	/**

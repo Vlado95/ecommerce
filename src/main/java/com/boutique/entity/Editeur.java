@@ -13,9 +13,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "editeur")
 @NamedQueries({ @NamedQuery(name = "editeur.all", query = "SELECT e FROM Editeur e"),
-	@NamedQuery(name = "editeur.search", query = "SELECT e FROM Editeur e WHERE e.nom like ?1")})
-public class Editeur extends Produit implements Serializable{
- 
+		@NamedQuery(name = "editeur.search", query = "SELECT e FROM Editeur e WHERE e.nom like ?1") })
+public class Editeur extends Produit implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -51,6 +51,5 @@ public class Editeur extends Produit implements Serializable{
 	public String toString() {
 		return "Editeur [id=" + id + ", nom=" + nom + "]";
 	}
-	
-	
+
 }

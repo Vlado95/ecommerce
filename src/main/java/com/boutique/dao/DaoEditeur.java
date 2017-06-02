@@ -15,9 +15,9 @@ import com.boutique.entity.Editeur;
 public class DaoEditeur implements IDao<Editeur> {
 
 	@PersistenceContext(unitName = "myPersistenceUnit") // injection initialisation  connexion base
-	
+
 	private EntityManager entityManager; // JPA
-	
+
 	@Override
 	public Editeur selectById(int id) {
 		return entityManager.find(Editeur.class, 1);
@@ -43,14 +43,14 @@ public class DaoEditeur implements IDao<Editeur> {
 	@Override
 	public void update(Editeur editeur) {
 		entityManager.merge(editeur);
-		
+
 	}
 
 	@Override
 	public void delete(int id) {
 		Editeur editeur = entityManager.find(Editeur.class, id);
 		entityManager.remove(editeur);
-		
+
 	}
 
 }

@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boutique.entity.Auteur;
 
-
-
 @Component // ou bien @repository
 @Transactional // version spring
 public class DaoAuteur implements IDao<Auteur> {
@@ -44,17 +42,17 @@ public class DaoAuteur implements IDao<Auteur> {
 	@Override
 	public Auteur insert(Auteur a) {
 		entityManager.persist(a);
-		// la clef primaire auto incr�ment� par mysql
+		// la clef primaire auto incr?ment? par mysql
 		// remonte dans l'objet java lors du .persist()
-		// grace � @GeneratedValue() sur l'id de l'Auteur
+		// grace ? @GeneratedValue() sur l'id de l'Auteur
 		return a;
 	}
 
 	@Override
 	public void update(Auteur a) {
-		// entityManager.getTransaction().begin() effectu� via @Transactional
+		// entityManager.getTransaction().begin() effectu? via @Transactional
 		entityManager.merge(a);
-		// entityManager.getTransaction().commit() effectu� via @Transactional
+		// entityManager.getTransaction().commit() effectu? via @Transactional
 	}
 
 	@Override

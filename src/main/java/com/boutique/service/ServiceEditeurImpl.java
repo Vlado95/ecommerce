@@ -10,10 +10,10 @@ import com.boutique.entity.Editeur;
 
 @Service
 public class ServiceEditeurImpl implements IService<Editeur> {
-	
+
 	@Autowired
 	private IDao<Editeur> daoEdteur;
-	
+
 	@Override
 	public Editeur rechercherParId(int id) {
 		return daoEdteur.selectById(id);
@@ -41,7 +41,7 @@ public class ServiceEditeurImpl implements IService<Editeur> {
 
 	@Override
 	public void supprimer(int id) {
-	    daoEdteur.delete(id);
+		daoEdteur.delete(id);
 	}
 
 }

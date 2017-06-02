@@ -4,8 +4,8 @@ import javax.jws.WebService;
 
 import org.springframework.stereotype.Service;
 
-@Service  // par defaut id =  calculateurImpl (le nom de la classe avec miniscule au debut)
-@WebService(endpointInterface="com.webservice.service.ICalculateur")
+@Service // par defaut id =  calculateurImpl (le nom de la classe avec miniscule au debut)
+@WebService(endpointInterface = "com.webservice.service.ICalculateur")
 public class CalculateurImpl implements ICalculateur {
 
 	@Override
