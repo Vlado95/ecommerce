@@ -21,6 +21,133 @@ CREATE TABLE IF NOT EXISTS users (
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
+-- film
+CREATE TABLE IF NOT EXISTS films (
+  id_film INT(20) NOT NULL AUTO_INCREMENT,
+  titre VARCHAR(255) NOT NULL,
+  resume VARCHAR(4000) NOT NULL,
+  langue VARCHAR(20) NOT NULL,
+  duree  VARCHAR(20) NOT NULL,
+  id_genre VARCHAR(11) NOT NULL,
+  id_acteur VARCHAR(11) NOT NULL,
+  publics VARCHAR(20) NOT NULL,
+  origine VARCHAR(20) NOT NULL,
+  format VARCHAR(20) NOT NULL,
+  quantite INT(20) NOT NULL,
+  prix DOUBLE  NOT NULL,
+  enabled TINYINT(1) NOT NULL,
+  PRIMARY KEY (id_film),
+  CONSTRAINT fk_film_genre
+    FOREIGN KEY (id_genre)
+    REFERENCES genre (id_genre)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_film_acteur
+    FOREIGN KEY (id_acteur)
+    REFERENCES acteur (id_acteur)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+
+-- genre
+CREATE TABLE IF NOT EXISTS genre (
+  id_genre INT(20) NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_genre))
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+
+-- realisateur
+CREATE TABLE IF NOT EXISTS realisateur (
+  id_realisateur INT(20) NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(45) NOT NULL,
+  prenom VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_realisateur))
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+
+-- acteur
+CREATE TABLE IF NOT EXISTS acteur (
+  id_acteur INT(20) NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(45) NOT NULL,
+  prenom VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_acteur))
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+-- film_acteur
+CREATE TABLE IF NOT EXISTS film_acteur (
+  id_film INT(20) NOT NULL ,
+  id_acteur INT(20) NOT NULL,
+  PRIMARY KEY (id_film, id_film),
+  CONSTRAINT fk_film_acteur
+    FOREIGN KEY (id_film)
+    REFERENCES films (id_film)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_acteur_film
+    FOREIGN KEY (id_acteur)
+    REFERENCES acteur (id_acteur)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+-- commande
+CREATE TABLE IF NOT EXISTS commande (
+  id_commande INT(20) NOT NULL AUTO_INCREMENT,
+  ref_cmd VARCHAR(255) NOT NULL,
+  id_lcmd INT(20) NOT NULL,
+  id_client INT(20) NOT NULL,
+  date_cmd DATE NOT NULL,
+  status VARCHAR(45) NOT NULL,
+  adresse_liv  VARCHAR(255) NOT NULL,
+  delai_jr INT(20) NOT NULL,
+  frais_port DOUBLE NOT NULL,
+  montant_total DOUBLE NOT NULL,
+  PRIMARY KEY (id_commande),
+  UNIQUE INDEX ref_UNIQUE (ref_cmd),
+   CONSTRAINT fk_id_lcmd_cmd
+    FOREIGN KEY (id_lcmd)
+    REFERENCES ligne_commande (id_lcmd)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_client_cmd
+    FOREIGN KEY (id_client)
+    REFERENCES clients(id_client)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+
+-- ligne_commande
+CREATE TABLE IF NOT EXISTS ligne_commande (
+  id_lcmd INT(20) NOT NULL AUTO_INCREMENT,
+  id_film INT(20) NOT NULL,
+  id_lcmd INT(20) NOT NULL,
+  quantite INT(20) NOT NULL,
+  prix DOUBLE NOT NULL,
+  PRIMARY KEY (id_lcmd),  
+  CONSTRAINT fk_film_cmd
+    FOREIGN KEY (id_film )
+    REFERENCES film (id_film)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+
+
+-- client
+CREATE TABLE IF NOT EXISTS clients (
+  id_client INT(20) NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(45) NOT NULL,
+  prenom VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  pwd  VARCHAR(45) NOT NULL,
+  adresse VARCHAR(255) NOT NULL,
+  telephone VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id_user),
+  UNIQUE INDEX email_UNIQUE (email ASC))
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
 	--- procedure pour initialise la base de donnee 
@@ -31,6 +158,14 @@ BEGIN
 	-- Lever temporairement les contraintes d'intégrité
 	SET FOREIGN_KEY_CHECKS=0;
 	TRUNCATE users;
+    TRUNCATE films;
+    TRUNCATE clients;
+    TRUNCATE acteur;
+    TRUNCATE genre;
+    TRUNCATE realisateur;
+    TRUNCATE ligne_commande;
+    TRUNCATE commande;
+    TRUNCATE film_acteur;
 	-- Remettre les contraintes d'integrite
 	SET FOREIGN_KEY_CHECKS=1;
 
@@ -83,7 +218,7 @@ BEGIN
 -- nom en majuscule en INSERT
   SET NEW.nom = trim(upper(NEW.nom));
   
-  -- adresse email sans espace en INSERT
+-- adresse email sans espace en INSERT
    SET NEW.email = trim(NEW.email);
 END§
 
