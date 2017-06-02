@@ -21,6 +21,21 @@ CREATE TABLE IF NOT EXISTS users (
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
+-- acteur
+CREATE TABLE IF NOT EXISTS acteur (
+  id_acteur INT(20) NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(45) NOT NULL,
+  prenom VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_acteur))
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+-- genre
+CREATE TABLE IF NOT EXISTS genre (
+  id_genre INT(20) NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_genre))
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
 -- film
 CREATE TABLE IF NOT EXISTS films (
   id_film INT(20) NOT NULL AUTO_INCREMENT,
@@ -28,8 +43,8 @@ CREATE TABLE IF NOT EXISTS films (
   resume VARCHAR(4000) NOT NULL,
   langue VARCHAR(20) NOT NULL,
   duree  VARCHAR(20) NOT NULL,
-  id_genre VARCHAR(11) NOT NULL,
-  id_acteur VARCHAR(11) NOT NULL,
+  id_genre INT(20) NOT NULL,
+  id_acteur INT(20) NOT NULL,
   publics VARCHAR(20) NOT NULL,
   origine VARCHAR(20) NOT NULL,
   format VARCHAR(20) NOT NULL,
@@ -50,12 +65,7 @@ CREATE TABLE IF NOT EXISTS films (
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
--- genre
-CREATE TABLE IF NOT EXISTS genre (
-  id_genre INT(20) NOT NULL AUTO_INCREMENT,
-  nom VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_genre))
-ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
 
 
 -- realisateur
@@ -67,27 +77,30 @@ CREATE TABLE IF NOT EXISTS realisateur (
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
--- acteur
-CREATE TABLE IF NOT EXISTS acteur (
-  id_acteur INT(20) NOT NULL AUTO_INCREMENT,
+-- client
+CREATE TABLE IF NOT EXISTS clients (
+  id_client INT(20) NOT NULL AUTO_INCREMENT,
   nom VARCHAR(45) NOT NULL,
   prenom VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_acteur))
+  email VARCHAR(45) NOT NULL,
+  pwd  VARCHAR(45) NOT NULL,
+  adresse VARCHAR(255) NOT NULL,
+  telephone VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id_client),
+  UNIQUE INDEX email_UNIQUE (email ASC))
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
--- film_acteur
-CREATE TABLE IF NOT EXISTS film_acteur (
-  id_film INT(20) NOT NULL ,
-  id_acteur INT(20) NOT NULL,
-  PRIMARY KEY (id_film, id_film),
-  CONSTRAINT fk_film_acteur
-    FOREIGN KEY (id_film)
-    REFERENCES films (id_film)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_acteur_film
-    FOREIGN KEY (id_acteur)
-    REFERENCES acteur (id_acteur)
+-- ligne_commande
+CREATE TABLE IF NOT EXISTS ligne_commande (
+  id_lcmd INT(20) NOT NULL AUTO_INCREMENT,
+  id_film INT(20) NOT NULL,
+  id_lcmd INT(20) NOT NULL,
+  quantite INT(20) NOT NULL,
+  prix DOUBLE NOT NULL,
+  PRIMARY KEY (id_lcmd),  
+  CONSTRAINT fk_film_cmd
+    FOREIGN KEY (id_film )
+    REFERENCES film (id_film)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
@@ -119,36 +132,25 @@ CREATE TABLE IF NOT EXISTS commande (
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
--- ligne_commande
-CREATE TABLE IF NOT EXISTS ligne_commande (
-  id_lcmd INT(20) NOT NULL AUTO_INCREMENT,
-  id_film INT(20) NOT NULL,
-  id_lcmd INT(20) NOT NULL,
-  quantite INT(20) NOT NULL,
-  prix DOUBLE NOT NULL,
-  PRIMARY KEY (id_lcmd),  
-  CONSTRAINT fk_film_cmd
-    FOREIGN KEY (id_film )
-    REFERENCES film (id_film)
+
+
+
+-- film_acteur
+CREATE TABLE IF NOT EXISTS film_acteur (
+  id_film INT(20) NOT NULL ,
+  id_acteur INT(20) NOT NULL,
+  CONSTRAINT pk_asso PRIMARY KEY (id_film, id_acteur),
+  CONSTRAINT fk_film_acteur
+    FOREIGN KEY (id_film)
+    REFERENCES films (id_film)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_act_film
+    FOREIGN KEY (id_acteur)
+    REFERENCES acteur (id_acteur)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
-
-
-
--- client
-CREATE TABLE IF NOT EXISTS clients (
-  id_client INT(20) NOT NULL AUTO_INCREMENT,
-  nom VARCHAR(45) NOT NULL,
-  prenom VARCHAR(45) NOT NULL,
-  email VARCHAR(45) NOT NULL,
-  pwd  VARCHAR(45) NOT NULL,
-  adresse VARCHAR(255) NOT NULL,
-  telephone VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id_user),
-  UNIQUE INDEX email_UNIQUE (email ASC))
-ENGINE = InnoDB DEFAULT CHARSET=latin1 §
-
 
 	--- procedure pour initialise la base de donnee 
 	
