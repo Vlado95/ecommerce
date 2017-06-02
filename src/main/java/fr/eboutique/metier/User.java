@@ -16,12 +16,12 @@ public class User {
 	/**
 	 * Description of the property id.
 	 */
-	private Integer id = 0;
+	private Integer id;
 
 	/**
 	 * Description of the property nom.
 	 */
-	private String nom = null;
+	private String nom;
 
 	/**
 	 * Description of the property prenom.
