@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS films (
   publics VARCHAR(20) NOT NULL,
   origine VARCHAR(20) NOT NULL,
   format VARCHAR(20) NOT NULL,
+  affiche longblob,
   quantite INT(20) NOT NULL,
   prix DOUBLE  NOT NULL,
   enabled TINYINT(1) NOT NULL,
@@ -94,7 +95,6 @@ ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 CREATE TABLE IF NOT EXISTS ligne_commande (
   id_lcmd INT(20) NOT NULL AUTO_INCREMENT,
   id_film INT(20) NOT NULL,
-  id_lcmd INT(20) NOT NULL,
   quantite INT(20) NOT NULL,
   prix DOUBLE NOT NULL,
   PRIMARY KEY (id_lcmd),  
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS commande (
   ref_cmd VARCHAR(255) NOT NULL,
   id_lcmd INT(20) NOT NULL,
   id_client INT(20) NOT NULL,
-  date_cmd DATE NOT NULL,
+  date_cmd DATETIME NOT NULL,
   status VARCHAR(45) NOT NULL,
   adresse_liv  VARCHAR(255) NOT NULL,
   delai_jr INT(20) NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS film_acteur (
   id_film INT(20) NOT NULL ,
   id_acteur INT(20) NOT NULL,
   CONSTRAINT pk_asso PRIMARY KEY (id_film, id_acteur),
-  CONSTRAINT fk_film_acteur
+  CONSTRAINT fk_film_act
     FOREIGN KEY (id_film)
     REFERENCES films (id_film)
     ON DELETE NO ACTION
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS film_acteur (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
-	--- procedure pour initialise la base de donnee 
+-- procedure pour initialise la base de donnee 
 	
 DROP PROCEDURE IF EXISTS eboutique_refresh §
 CREATE DEFINER=root@localhost PROCEDURE eboutique_refresh()
@@ -180,11 +180,27 @@ BEGIN
 		START TRANSACTION;
         
 		-- contenu de base
-	INSERT INTO users(id_user,nom, prenom, email,pwd,role,enabled) VALUES
+        
+    INSERT INTO users(id_user,nom, prenom, email,pwd,role,enabled) VALUES
 		(1, 'Haddock', 'Archibald', 'haddock@moulinsart.be','karara','ROLE_ADMIN',1),
 		(2,'Castafiore', 'Bianca', 'bianca.castafiore@scala.it','kamiri','ROLE_USER',1),
 		(3, 'Tournesol', 'Tryphon', 'tournesol@moulinsart.be','milou','ROLE_USER',1);
-
+        
+	INSERT INTO acteur(id_acteur,nom, prenom) VALUES
+		(1, 'Pitt', 'Brad'),
+		(2,'Cruise', 'Tom'),
+		(3, 'Afflek', 'Ben');
+	
+    INSERT INTO genre(id_genre,nom) VALUES
+		(1, 'Action'),
+		(2,'Romance'),
+		(3, 'Comedie');
+        
+	INSERT INTO realisateur(id_realisateur,nom, prenom) VALUES
+		(1, 'Christopher',' McQuarrie'),
+		(2,'Doug',' Liman'),
+		(3, ' Zack', 'Snyder');
+        
 	  COMMIT;
 	END;
 END§
@@ -232,6 +248,44 @@ BEGIN
  SET NEW.prenom = trim(initcap(NEW.prenom));
  SET NEW.nom = trim(upper(NEW.nom));
  SET NEW.email = trim(NEW.email);
+END§
+
+
+DROP TRIGGER IF EXISTS trigger_insert_clients§
+CREATE TRIGGER trigger_insert_clients
+BEFORE INSERT ON clients
+FOR EACH ROW
+BEGIN
+-- prénom capitalisé en INSERT
+	SET NEW.prenom = upper(trim(NEW.prenom));
+
+-- nom en majuscule en INSERT
+  SET NEW.nom = trim(upper(NEW.nom));
+  
+-- adresse email sans espace en INSERT
+   SET NEW.email = trim(NEW.email);
+END§
+
+DROP TRIGGER IF EXISTS clients_before_update_trigger§
+CREATE TRIGGER clients_before_update_trigger
+BEFORE UPDATE ON clients
+FOR EACH ROW
+BEGIN
+ SET NEW.prenom = trim(initcap(NEW.prenom));
+ SET NEW.nom = trim(upper(NEW.nom));
+ SET NEW.email = trim(NEW.email);
+END§
+
+
+
+
+DROP TRIGGER IF EXISTS trigger_insert_commende§
+CREATE TRIGGER trigger_insert_commende
+BEFORE INSERT ON commande
+FOR EACH ROW
+BEGIN
+-- date de commande
+ SET NEW.date_cmd = NOW();
 END§
 
 
