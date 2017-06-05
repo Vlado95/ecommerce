@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 <!-- <jta-data-source>java:/DefaultDS</jta-data-source> -->
 <!-- 		<provider>org.hibernate.ejb.HibernatePersistence</provider>   pour hiberante 4-->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>com.boutique.admin.entity.User</class>  
+		<class>fr.eboutique.metier.User</class>  
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		<!-- <property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->

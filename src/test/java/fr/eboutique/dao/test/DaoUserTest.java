@@ -1,4 +1,4 @@
-package com.boutique.dao.test;
+package fr.eboutique.dao.test;
 
 import static org.junit.Assert.*;
 
@@ -10,15 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.boutique.admin.entity.User;
-import com.boutique.dao.IDaoUser;
+import fr.eboutique.dao.IDao;
+import fr.eboutique.metier.User;
+
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/jpaSpringConf.xml" })
 public class DaoUserTest {
 
 	@Autowired
-	private IDaoUser daoUser; // ? tester
+	private IDao<User> daoUser; // ? tester
 
 	@Before
 	public void setUp() throws Exception {

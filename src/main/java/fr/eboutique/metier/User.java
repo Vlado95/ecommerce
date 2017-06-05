@@ -1,21 +1,33 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
 package fr.eboutique.metier;
 
-// Start of user code (user defined imports)
+import java.io.Serializable;
 
-// End of user code
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-/**
- * Description of User.
- * 
- * @author Fitec
- */
-public class User {
+@Entity
+@Table(name = "users")
+@NamedQueries({ @NamedQuery(name = "user.all", query = "SELECT u FROM User u"),
+		@NamedQuery(name = "user.search", query = "SELECT u FROM User u WHERE u.nom like ?1"),
+		@NamedQuery(name = "user.byEmailPwd", query = "SELECT u FROM User u WHERE u.email = ?1 AND u.password = ?2") })
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2518696209539662335L;
+
 	/**
 	 * Description of the property id.
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_user")
 	private Integer id;
 
 	/**
@@ -26,22 +38,18 @@ public class User {
 	/**
 	 * Description of the property prenom.
 	 */
-	private String prenom = "";
+	private String prenom;
 
 	/**
 	 * Description of the property email.
 	 */
-	private String email = "";
+	private String email;
 
 	/**
-	 * Description of the property mdp.
+	 * Description of the property password.
 	 */
-	private String mdp = "";
-
-	/**
-	 * Description of the property role.
-	 */
-	private String role = "";
+	@Column(name = "pwd")
+	private String password;
 
 	// Start of user code (user defined attributes for User)
 
@@ -57,6 +65,14 @@ public class User {
 	}
 
 	// Start of user code (user defined methods for User)
+
+	//	public User(Integer id, String nom, String prenom, String email, String password) {
+	//		this.id = id;
+	//		this.nom = nom;
+	//		this.prenom = prenom;
+	//		this.email = email;
+	//		this.password = password;
+	//	}
 
 	// End of user code
 	/**
@@ -124,35 +140,24 @@ public class User {
 	}
 
 	/**
-	 * Returns mdp.
-	 * @return mdp 
+	 * Returns password.
+	 * @return password 
 	 */
-	public String getMdp() {
-		return this.mdp;
+	public String getPassword() {
+		return this.password;
 	}
 
 	/**
-	 * Sets a value to attribute mdp. 
-	 * @param newMdp 
+	 * Sets a value to attribute password. 
+	 * @param newPassword 
 	 */
-	public void setMdp(String newMdp) {
-		this.mdp = newMdp;
+	public void setPassword(String newPassword) {
+		this.password = newPassword;
 	}
 
-	/**
-	 * Returns role.
-	 * @return role 
-	 */
-	public String getRole() {
-		return this.role;
-	}
-
-	/**
-	 * Sets a value to attribute role. 
-	 * @param newRole 
-	 */
-	public void setRole(String newRole) {
-		this.role = newRole;
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + "]";
 	}
 
 }
