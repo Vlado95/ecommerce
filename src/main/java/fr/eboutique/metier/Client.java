@@ -3,6 +3,19 @@
  *******************************************************************************/
 package fr.eboutique.metier;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -12,45 +25,50 @@ package fr.eboutique.metier;
  * 
  * @author Fitec
  */
-public class Client {
+@Entity
+@Table(name="clients")
+public class Client implements Serializable{
 	/**
 	 * Description of the property id.
 	 */
-	private Integer id = 0;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_client")
+	private Integer id ;
 
 	/**
 	 * Description of the property nom.
 	 */
-	private String nom = "";
+	private String nom ;
 
 	/**
 	 * Description of the property premon.
 	 */
-	private String premon = "";
+	private String premon ;
 
 	/**
 	 * Description of the property email.
 	 */
-	private String email = "";
+	private String email ;
 
 	/**
 	 * Description of the property adresse.
 	 */
-	private String adresse = "";
+	private String adresse ;
 
 	/**
 	 * Description of the property telephone.
 	 */
-	private String telephone = "";
+	private String telephone ;
 
 	/**
 	 * Description of the property mdp.
 	 */
-	private String mdp = "";
+	@Column(name="pwd")
+	private String mdp ;
 
-	// Start of user code (user defined attributes for Client)
-
-	// End of user code
+	@OneToMany(mappedBy="client")
+	private List<Commande> commandes = new ArrayList<>();
 
 	/**
 	 * The constructor.
@@ -176,4 +194,13 @@ public class Client {
 		this.mdp = newMdp;
 	}
 
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
+	}
+
+	
 }

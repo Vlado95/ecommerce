@@ -3,6 +3,20 @@
  *******************************************************************************/
 package fr.eboutique.metier;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -12,10 +26,15 @@ package fr.eboutique.metier;
  * 
  * @author Fitec
  */
-public class Acteur {
+@Entity
+public class Acteur implements Serializable{
+	private static final long serialVersionUID = 1L; 
 	/**
 	 * Description of the property id.
 	 */
+	@Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_acteur")
 	private Integer id ;
 
 	/**
@@ -27,6 +46,12 @@ public class Acteur {
 	 * Description of the property prenom.
 	 */
 	private String prenom ;
+	
+	//add relationship between Film and Acteur
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinTable(name = "film_acteur", joinColumns = { @JoinColumn(name = "id_film") }, inverseJoinColumns = { @JoinColumn(name = "id_acteur") })
+	private List<Film> listFilms;
+	
 
 	// Start of user code (user defined attributes for Acteur)
 
@@ -90,6 +115,14 @@ public class Acteur {
 	 */
 	public void setPrenom(String newPrenom) {
 		this.prenom = newPrenom;
+	}
+
+	public List<Film> getListFilms() {
+		return listFilms;
+	}
+
+	public void setListFilms(List<Film> listFilms) {
+		this.listFilms = listFilms;
 	}
 
 }

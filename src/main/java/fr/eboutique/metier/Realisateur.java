@@ -3,6 +3,17 @@
  *******************************************************************************/
 package fr.eboutique.metier;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -12,26 +23,36 @@ package fr.eboutique.metier;
  * 
  * @author Fitec
  */
-public class Realisateur {
+
+@Entity
+public class Realisateur implements Serializable {
+	
+	private static final long serialVersionUID = 1L; 
 	/**
 	 * Description of the property id.
 	 */
-	private Integer id = null;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_realisateur")
+	private Integer id;
 
 	/**
 	 * Description of the property nom.
 	 */
-	private String nom = "";
+	private String nom;
 
 	/**
 	 * Description of the property prenom.
 	 */
-	private String prenom = "";
+	private String prenom;
 
 	// Start of user code (user defined attributes for Realisateur)
 
 	// End of user code
 
+	//declarer la liste de film par realisateur
+	@OneToMany(mappedBy = "realisateur" ,fetch = FetchType.LAZY)
+	private List<Film> films;
 	/**
 	 * The constructor.
 	 */
@@ -91,5 +112,15 @@ public class Realisateur {
 	public void setPrenom(String newPrenom) {
 		this.prenom = newPrenom;
 	}
+
+	public List<Film> getFilms() {
+		return films;
+	}
+
+	public void setFilms(List<Film> films) {
+		this.films = films;
+	}
+	
+	
 
 }

@@ -3,6 +3,19 @@
  *******************************************************************************/
 package fr.eboutique.metier;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -12,20 +25,33 @@ package fr.eboutique.metier;
  * 
  * @author Fitec
  */
-public class Genre {
+
+@Entity
+@Table(name="genre")
+public class Genre implements Serializable{
+	
+	private static final long serialVersionUID = 1L; 
 	/**
 	 * Description of the property id.
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_genre")
 	private Integer id = null;
 
 	/**
 	 * Description of the property nom.
 	 */
-	private String nom = "";
+	private String nom;
 
 	// Start of user code (user defined attributes for Genre)
 
 	// End of user code
+	
+	//add collection of Film
+	@OneToMany(mappedBy = "genre" ,fetch = FetchType.LAZY)
+	private List<Film> filmsList = new ArrayList<>();
+	
 
 	/**
 	 * The constructor.
@@ -56,19 +82,30 @@ public class Genre {
 	}
 
 	/**
-	 * Returns nom.
+	 * Returns nom .
 	 * @return nom 
 	 */
 	public String getNom() {
-		return this.nom;
+		return this.nom ;
 	}
 
 	/**
 	 * Sets a value to attribute nom. 
 	 * @param newNom 
 	 */
-	public void setNom(String newNom) {
-		this.nom = newNom;
+	public void setNom (String newNom ) {
+		this.nom  = newNom ;
 	}
+
+	public List<Film> getFilmsList() {
+		return filmsList;
+	}
+
+	public void setFilmsList(List<Film> filmsList) {
+		this.filmsList = filmsList;
+	}
+	
+	
+	
 
 }

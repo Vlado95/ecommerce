@@ -6,7 +6,15 @@ package fr.eboutique.metier;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 // Start of user code (user defined imports)
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 // End of user code
 
@@ -15,41 +23,50 @@ import java.util.List;
  * 
  * @author Fitec
  */
+@Entity
 public class Commande {
 	/**
 	 * Description of the property id.
 	 */
-	private Integer id = 0;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_commande")
+	private Integer id;
 
 	/**
 	 * Description of the property status.
 	 */
-	private String status = "";
+	private String status;
 
 	/**
 	 * Description of the property frais_port.
 	 */
-	private double frais_port = 0D;
+	@Column(name = "frais_port")
+	private double fraisPort;
 
 	/**
 	 * Description of the property montant_total.
 	 */
-	public double montant_total = 0D;
+	@Column(name = "montant_total")
+	private double montantTotal;
 
 	/**
-	 * Description of the property Date_date.
+	 * @Description of the property Date de commande.
 	 */
-	private Date Date_date = new Date();
+	@Column(name = "date_cmd")
+	private Date DateCmd = new Date();
 
 	/**
-	 * Description of the property delai_jr.
+	 * @Description of the property delais de livraision.
 	 */
-	private Integer delai_jr = null;
+	@Column(name = "delai_jr")
+	private Integer delaisLivraison;
 
 	/**
 	 * Description of the property adresse_livraison.
 	 */
-	private String adresse_livraison = "";
+	@Column(name = "adresse_liv")
+	private String adresseLivraison;
 
 	/**
 	 * Description of the property ligneCommandes.
@@ -59,12 +76,15 @@ public class Commande {
 	/**
 	 * Description of the property ref_cmd.
 	 */
-	private String ref_cmd = "";
+	@Column(name = "ref_cmd")
+	private String reference;
 
 	/**
 	 * Description of the property clients.
 	 */
-	private Client clients = null;
+	@ManyToOne
+	@JoinColumn(name = "id_client")
+	private Client client;
 
 	// Start of user code (user defined attributes for Commande)
 
@@ -79,159 +99,86 @@ public class Commande {
 		// End of user code
 	}
 
-	// Start of user code (user defined methods for Commande)
-
-	// End of user code
-	/**
-	 * Returns id.
-	 * @return id 
-	 */
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
-	/**
-	 * Sets a value to attribute id. 
-	 * @param newId 
-	 */
-	public void setId(int newId) {
-		this.id = newId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	/**
-	 * Returns status.
-	 * @return status 
-	 */
 	public String getStatus() {
-		return this.status;
+		return status;
 	}
 
-	/**
-	 * Sets a value to attribute status. 
-	 * @param newStatus 
-	 */
-	public void setStatus(String newStatus) {
-		this.status = newStatus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	/**
-	 * Returns frais_port.
-	 * @return frais_port 
-	 */
-	public double getFrais_port() {
-		return this.frais_port;
+	public double getFraisPort() {
+		return fraisPort;
 	}
 
-	/**
-	 * Sets a value to attribute frais_port. 
-	 * @param newFrais_port 
-	 */
-	public void setFrais_port(double newFrais_port) {
-		this.frais_port = newFrais_port;
+	public void setFraisPort(double fraisPort) {
+		this.fraisPort = fraisPort;
 	}
 
-	/**
-	 * Returns montant_total.
-	 * @return montant_total 
-	 */
-	public double getMontant_total() {
-		return this.montant_total;
+	public double getMontantTotal() {
+		return montantTotal;
 	}
 
-	/**
-	 * Sets a value to attribute montant_total. 
-	 * @param newMontant_total 
-	 */
-	public void setMontant_total(double newMontant_total) {
-		this.montant_total = newMontant_total;
+	public void setMontantTotal(double montantTotal) {
+		this.montantTotal = montantTotal;
 	}
 
-	/**
-	 * Returns Date_date.
-	 * @return Date_date 
-	 */
-	public Date getDate_date() {
-		return this.Date_date;
+	public Date getDateCmd() {
+		return DateCmd;
 	}
 
-	/**
-	 * Sets a value to attribute Date_date. 
-	 * @param newDate_date 
-	 */
-	public void setDate_date(Date newDate_date) {
-		this.Date_date = newDate_date;
+	public void setDateCmd(Date dateCmd) {
+		DateCmd = dateCmd;
 	}
 
-	/**
-	 * Returns delai_jr.
-	 * @return delai_jr 
-	 */
-	public Integer getDelai_jr() {
-		return this.delai_jr;
+	public Integer getDelaisLivraison() {
+		return delaisLivraison;
 	}
 
-	/**
-	 * Sets a value to attribute delai_jr. 
-	 * @param newDelai_jr 
-	 */
-	public void setDelai_jr(Integer newDelai_jr) {
-		this.delai_jr = newDelai_jr;
+	public void setDelaisLivraison(Integer delaisLivraison) {
+		this.delaisLivraison = delaisLivraison;
 	}
 
-	/**
-	 * Returns adresse_livraison.
-	 * @return adresse_livraison 
-	 */
-	public String getAdresse_livraison() {
-		return this.adresse_livraison;
+	public String getAdresseLivraison() {
+		return adresseLivraison;
 	}
 
-	/**
-	 * Sets a value to attribute adresse_livraison. 
-	 * @param newAdresse_livraison 
-	 */
-	public void setAdresse_livraison(String newAdresse_livraison) {
-		this.adresse_livraison = newAdresse_livraison;
+	public void setAdresseLivraison(String adresseLivraison) {
+		this.adresseLivraison = adresseLivraison;
 	}
 
-	/**
-	 * Returns ligneCommandes.
-	 * @return ligneCommandes 
-	 */
 	public List<LigneCommande> getLigneCommandes() {
-		return this.ligneCommandes;
+		return ligneCommandes;
 	}
 
-	/**
-	 * Returns ref_cmd.
-	 * @return ref_cmd 
-	 */
-	public String getRef_cmd() {
-		return this.ref_cmd;
+	public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
+		this.ligneCommandes = ligneCommandes;
 	}
 
-	/**
-	 * Sets a value to attribute ref_cmd. 
-	 * @param newRef_cmd 
-	 */
-	public void setRef_cmd(String newRef_cmd) {
-		this.ref_cmd = newRef_cmd;
+	public String getReference() {
+		return reference;
 	}
 
-	/**
-	 * Returns clients.
-	 * @return clients 
-	 */
-	public Client getClients() {
-		return this.clients;
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 
-	/**
-	 * Sets a value to attribute clients. 
-	 * @param newClients 
-	 */
-	public void setClients(Client newClients) {
-		this.clients = newClients;
+	public Client getClient() {
+		return client;
 	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
 
 }

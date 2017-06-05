@@ -6,6 +6,8 @@ package fr.eboutique.metier;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.OneToMany;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -24,7 +26,7 @@ public class Panier {
 	/**
 	 * Description of the property ligneCommandes.
 	 */
-	private List<LigneCommande> ligneCommandes = new ArrayList();
+	private List<LigneCommande> ligneCommandes = new ArrayList<>();
 
 	// Start of user code (user defined attributes for Panier)
 

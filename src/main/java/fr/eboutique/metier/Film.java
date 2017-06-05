@@ -3,8 +3,23 @@
  *******************************************************************************/
 package fr.eboutique.metier;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 // Start of user code (user defined imports)
 
@@ -15,72 +30,88 @@ import java.util.List;
  * 
  * @author Fitec
  */
-public class Film {
 
+@Entity
+@NamedQueries({ @NamedQuery(name = "film.all", query = "SELECT f FROM Film f"),
+	@NamedQuery(name = "film.searchByTitre", query = "SELECT f FROM Film f WHERE f.titre like ?1") })
+public class Film implements Serializable {
+	
+	private static final long serialVersionUID = 1L; 
+
+	@Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_film")
 	private Integer id; 
 	
-	private String titre = "";
+	private String titre ;
 
 	/**
 	 * Description of the property public.
 	 */
-	private String publics="";
+	private String publics ;
 
 	/**
 	 * Description of the property prix.
 	 */
-	private double prix = 0D;
+	private double prix ;
 
 	/**
 	 * Description of the property origine.
 	 */
-	private String origine = "";
+	private String origine ;
 
 	/**
 	 * Description of the property duree.
 	 */
-	private String duree = "";
+	private String duree ;
 
 	/**
 	 * Description of the property type.
 	 */
-	private String type = "";
+	private String type ;
 
 	/**
 	 * Description of the property langue.
 	 */
-	private String langue = "";
+	private String langue ;
 
 	/**
 	 * Description of the property quantite.
 	 */
-	private int quantite = 0;
+	private int quantite;
 
 	/**
 	 * Description of the property Resume.
 	 */
-	private String Resume ;
+	private String resume;
 
+	private Byte[] affiche;
 
 	/**
 	 * Description of the property realisateurs.
 	 */
+	@ManyToOne
+	@JoinColumn(name="id_realisateur")
 	private Realisateur realisateur;
 
 	/**
 	 * Description of the property genre.
 	 */
+	
+	@ManyToOne
+	@JoinColumn(name="id_genre")
 	private Genre genre ;
+	
 
-	/**
-	 * Description of the property acteurs.
-	 */
-	public List<Acteur> acteurs = new ArrayList<>();
+	//add relatioship between Film and Acteur
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listFilms")
+	private List<Acteur> listActeurs = new ArrayList<>();
+	
 
-	// Start of user code (user defined attributes for Film)
+	@OneToMany(mappedBy = "film")
+	private List<LigneCommande> listLignesCommande =new ArrayList<>();
 
-	// End of user code
-
+	
 	/**
 	 * The constructor.
 	 */
@@ -242,7 +273,7 @@ public class Film {
 	 * @return Resume 
 	 */
 	public String getResume() {
-		return this.Resume;
+		return this.resume;
 	}
 
 	/**
@@ -250,7 +281,7 @@ public class Film {
 	 * @param newResume 
 	 */
 	public void setResume(String newResume) {
-		this.Resume = newResume;
+		this.resume = newResume;
 	}
 
 
@@ -287,13 +318,53 @@ public class Film {
 	public void setGenre(Genre newGenre) {
 		this.genre = newGenre;
 	}
+	
+	
 
-	/**
-	 * Returns acteurs.
-	 * @return acteurs 
-	 */
-	public List<Acteur> getActeurs() {
-		return this.acteurs;
+	public String getPublics() {
+		return publics;
 	}
+
+	public void setPublics(String publics) {
+		this.publics = publics;
+	}
+
+	public Byte[] getAffiche() {
+		return affiche;
+	}
+
+	public void setAffiche(Byte[] affiche) {
+		this.affiche = affiche;
+	}
+
+	public Realisateur getRealisateur() {
+		return realisateur;
+	}
+
+	public void setRealisateur(Realisateur realisateur) {
+		this.realisateur = realisateur;
+	}
+
+	public List<Acteur> getListActeurs() {
+		return listActeurs;
+	}
+
+	public void setListActeurs(List<Acteur> listActeurs) {
+		this.listActeurs = listActeurs;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Film [id=" + id + ", titre=" + titre + ", publics=" + publics + ", prix=" + prix + ", origine="
+				+ origine + ", duree=" + duree + ", type=" + type + ", langue=" + langue + ", quantite=" + quantite
+				+ ", resume=" + resume + ", affiche=" + Arrays.toString(affiche) + ", realisateur=" + realisateur
+				+ ", genre=" + genre + ", listActeurs=" + listActeurs + "]";
+	}
+
+	
 
 }

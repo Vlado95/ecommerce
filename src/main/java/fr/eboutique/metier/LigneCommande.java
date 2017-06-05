@@ -3,6 +3,17 @@
  *******************************************************************************/
 package fr.eboutique.metier;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -12,7 +23,22 @@ package fr.eboutique.metier;
  * 
  * @author Fitec
  */
-public class LigneCommande {
+@Entity
+@Table(name="ligne_commande")
+public class LigneCommande implements Serializable{
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Description of the property id.
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_lcmd")
+	private Integer id;
 	/**
 	 * Description of the property quantite.
 	 */
@@ -23,15 +49,13 @@ public class LigneCommande {
 	 */
 	private Double prix = Double.valueOf(0D);
 
-	/**
-	 * Description of the property id.
-	 */
-	private Integer id = null;
 
 	/**
 	 * Description of the property films.
 	 */
-	private Film films = null;
+	@ManyToOne
+	@JoinColumn(name="id_film")
+	private Film film;
 
 	// Start of user code (user defined attributes for LigneCommande)
 
@@ -101,16 +125,16 @@ public class LigneCommande {
 	 * Returns films.
 	 * @return films 
 	 */
-	public Film getFilms() {
-		return this.films;
+	public Film getFilm() {
+		return this.film;
 	}
 
 	/**
 	 * Sets a value to attribute films. 
 	 * @param newFilms 
 	 */
-	public void setFilms(Film newFilms) {
-		this.films = newFilms;
+	public void setFilm(Film newFilm) {
+		this.film = newFilm;
 	}
 
 }
