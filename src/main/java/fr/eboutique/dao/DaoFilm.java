@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import fr.eboutique.metier.Film;
-import fr.eboutique.metier.User;
 
 @Component
 @Transactional

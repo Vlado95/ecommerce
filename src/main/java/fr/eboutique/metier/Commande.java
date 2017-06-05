@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 // End of user code
 
@@ -71,6 +72,8 @@ public class Commande {
 	/**
 	 * Description of the property ligneCommandes.
 	 */
+	@OneToMany
+	@JoinColumn(name="id_lcmd")
 	private List<LigneCommande> ligneCommandes = new ArrayList();
 
 	/**

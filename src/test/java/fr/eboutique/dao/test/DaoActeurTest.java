@@ -4,22 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.eboutique.dao.IDao;
-import fr.eboutique.metier.Film;
+public class DaoActeurTest {
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/applicationContext.xml" })
-//@ContextConfiguration(locations = { "/jpaSpringConf.xml" })
-public class DaoFilmTest {
-
-	@Autowired
-	IDao<Film> daoFilm;
-	 
 	@Before
 	public void setUp() throws Exception {
 	}
