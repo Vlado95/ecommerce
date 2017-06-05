@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,6 +30,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="genre")
+@NamedQueries({ @NamedQuery(name = "genre.all", query = "SELECT g FROM Genre g"),
+	@NamedQuery(name = "genre.search", query = "SELECT g FROM Genre g WHERE g.nom like ?1") })
 public class Genre implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 

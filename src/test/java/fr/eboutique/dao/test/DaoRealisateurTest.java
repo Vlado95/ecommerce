@@ -1,3 +1,4 @@
+package fr.eboutique.dao.test;
 //package fr.eboutique.dao.test;
 //
 //import static org.junit.Assert.*;
@@ -5,7 +6,7 @@
 //import org.junit.Before;
 //import org.junit.Test;
 //
-//public class DaoGenre {
+//public class DaoREalisateurTest {
 //
 //	@Before
 //	public void setUp() throws Exception {

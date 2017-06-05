@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.boutique.dao.IDao;
 import com.boutique.entity.Livre;
 
+import fr.eboutique.service.IService;
+
 @Service
 public class ServiceLivreImpl implements IService<Livre> {
 

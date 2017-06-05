@@ -36,6 +36,14 @@ CREATE TABLE IF NOT EXISTS genre (
   PRIMARY KEY (id_genre))
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
+-- realisateur
+CREATE TABLE IF NOT EXISTS realisateur (
+  id_realisateur INT(20) NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(45) NOT NULL,
+  prenom VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_realisateur))
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
 -- film
 CREATE TABLE IF NOT EXISTS films (
   id_film INT(20) NOT NULL AUTO_INCREMENT,
@@ -44,38 +52,27 @@ CREATE TABLE IF NOT EXISTS films (
   langue VARCHAR(20) NOT NULL,
   duree  VARCHAR(20) NOT NULL,
   id_genre INT(20) NOT NULL,
-  id_acteur INT(20) NOT NULL,
+  id_realisateur INT(20) NOT NULL,
   publics VARCHAR(20) NOT NULL,
   origine VARCHAR(20) NOT NULL,
   format VARCHAR(20) NOT NULL,
   affiche longblob,
   quantite INT(20) NOT NULL,
   prix DOUBLE  NOT NULL,
-  enabled TINYINT(1) NOT NULL,
   PRIMARY KEY (id_film),
   CONSTRAINT fk_film_genre
     FOREIGN KEY (id_genre)
     REFERENCES genre (id_genre)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_film_acteur
-    FOREIGN KEY (id_acteur)
-    REFERENCES acteur (id_acteur)
+  CONSTRAINT fk_film_realisateur
+    FOREIGN KEY (id_realisateur)
+    REFERENCES realisateur (id_realisateur)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
-
-
-
--- realisateur
-CREATE TABLE IF NOT EXISTS realisateur (
-  id_realisateur INT(20) NOT NULL AUTO_INCREMENT,
-  nom VARCHAR(45) NOT NULL,
-  prenom VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_realisateur))
-ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
 
 -- client

@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 // Start of user code (user defined imports)
@@ -25,6 +27,8 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "realisateur.all", query = "SELECT r FROM Realisateur r"),
+	@NamedQuery(name = "realisateur.search", query = "SELECT r FROM Realisateur r WHERE r.nom like ?1") })
 public class Realisateur implements Serializable {
 	
 	private static final long serialVersionUID = 1L; 

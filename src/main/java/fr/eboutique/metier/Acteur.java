@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 // Start of user code (user defined imports)
 
@@ -27,6 +29,8 @@ import javax.persistence.ManyToMany;
  * @author Fitec
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = "acteur.all", query = "SELECT a FROM Acteur a"),
+	@NamedQuery(name = "acteur.search", query = "SELECT a FROM Acteur a WHERE a.nom like ?1") })
 public class Acteur implements Serializable{
 	private static final long serialVersionUID = 1L; 
 	/**

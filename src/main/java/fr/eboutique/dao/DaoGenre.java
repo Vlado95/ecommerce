@@ -14,45 +14,50 @@ import fr.eboutique.metier.Genre;
 @Transactional
 public class DaoGenre implements IDao<Genre> {
 
-	
 	@PersistenceContext(unitName = "myPersistenceUnit")
 	private EntityManager entityManager;
-	
+
 	@Override
 	public Genre selectById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Genre.class, id);
 	}
 
 	@Override
 	public List<Genre> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		/*
+		 * return entityManager.createQuery("SELECT a FROM Genre a",
+		 * Genre.class).getResultList();
+		 */
+		return entityManager.createNamedQuery("genre.all", Genre.class).getResultList();
 	}
 
 	@Override
 	public List<Genre> searchLike(String str) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createNamedQuery("genre.search", Genre.class).setParameter(1, "%" + str + "%")
+				.getResultList();
 	}
 
 	@Override
-	public Genre insert(Genre objet) {
-		// TODO Auto-generated method stub
-		return null;
+	public Genre insert(Genre g) {
+		entityManager.persist(g);
+		// la clef primaire auto incr?ment? par mysql
+		// remonte dans l'objet java lors du .persist()
+		// grace ? @GeneratedValue() sur l'id de l'Genre
+		return g;
 	}
 
 	@Override
-	public void update(Genre objet) {
-		// TODO Auto-generated method stub
-		
+	public void update(Genre g) {
+		// entityManager.getTransaction().begin() effectu? via @Transactional
+		entityManager.merge(g);
+		// entityManager.getTransaction().commit() effectu? via @Transactional
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+		Genre g = entityManager.find(Genre.class, id);
+		entityManager.remove(g);
+
 	}
 
-	
 }

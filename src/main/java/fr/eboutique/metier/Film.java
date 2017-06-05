@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 // Start of user code (user defined imports)
 
@@ -32,6 +33,7 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
+@Table(name="films")
 @NamedQueries({ @NamedQuery(name = "film.all", query = "SELECT f FROM Film f"),
 	@NamedQuery(name = "film.searchByTitre", query = "SELECT f FROM Film f WHERE f.titre like ?1") })
 public class Film implements Serializable {
@@ -68,7 +70,7 @@ public class Film implements Serializable {
 	/**
 	 * Description of the property type.
 	 */
-	private String type ;
+	private String format ;
 
 	/**
 	 * Description of the property langue.
@@ -224,16 +226,16 @@ public class Film implements Serializable {
 	 * Returns type.
 	 * @return type 
 	 */
-	public String getType() {
-		return this.type;
+	public String getFormat() {
+		return this.format;
 	}
 
 	/**
 	 * Sets a value to attribute type. 
 	 * @param newType 
 	 */
-	public void setType(String newType) {
-		this.type = newType;
+	public void setFormat(String newFormat) {
+		this.format = newFormat;
 	}
 
 	/**
@@ -360,7 +362,7 @@ public class Film implements Serializable {
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", titre=" + titre + ", publics=" + publics + ", prix=" + prix + ", origine="
-				+ origine + ", duree=" + duree + ", type=" + type + ", langue=" + langue + ", quantite=" + quantite
+				+ origine + ", duree=" + duree + ", format=" + format + ", langue=" + langue + ", quantite=" + quantite
 				+ ", resume=" + resume + ", affiche=" + Arrays.toString(affiche) + ", realisateur=" + realisateur
 				+ ", genre=" + genre + ", listActeurs=" + listActeurs + "]";
 	}

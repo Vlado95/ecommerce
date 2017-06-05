@@ -19,38 +19,45 @@ public class DaoActeur implements IDao<Acteur> {
 	
 	@Override
 	public Acteur selectById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Acteur.class, id);
 	}
 
 	@Override
 	public List<Acteur> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		/*
+		 * return entityManager.createQuery("SELECT a FROM Acteur a",
+		 * Acteur.class).getResultList();
+		 */
+		return entityManager.createNamedQuery("acteur.all", Acteur.class).getResultList();
 	}
 
 	@Override
 	public List<Acteur> searchLike(String str) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createNamedQuery("acteur.search", Acteur.class).setParameter(1, "%" + str + "%")
+				.getResultList();
 	}
 
 	@Override
-	public Acteur insert(Acteur objet) {
-		// TODO Auto-generated method stub
-		return null;
+	public Acteur insert(Acteur a) {
+		entityManager.persist(a);
+		// la clef primaire auto incr?ment? par mysql
+		// remonte dans l'objet java lors du .persist()
+		// grace ? @GeneratedValue() sur l'id de l'Acteur
+		return a;
 	}
 
 	@Override
-	public void update(Acteur objet) {
-		// TODO Auto-generated method stub
-		
+	public void update(Acteur a) {
+		// entityManager.getTransaction().begin() effectu? via @Transactional
+		entityManager.merge(a);
+		// entityManager.getTransaction().commit() effectu? via @Transactional
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+		Acteur a = entityManager.find(Acteur.class, id);
+		entityManager.remove(a);
+
 	}
 
 }

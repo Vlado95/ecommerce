@@ -19,38 +19,46 @@ public class DaoRealisateur implements IDao<Realisateur> {
 	
 	@Override
 	public Realisateur selectById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Realisateur.class, id);
 	}
 
 	@Override
 	public List<Realisateur> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		/*
+		 * return entityManager.createQuery("SELECT a FROM Realisateur a",
+		 * Realisateur.class).getResultList();
+		 */
+		return entityManager.createNamedQuery("realisateur.all", Realisateur.class).getResultList();
 	}
 
 	@Override
 	public List<Realisateur> searchLike(String str) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createNamedQuery("realisateur.search", Realisateur.class).setParameter(1, "%" + str + "%")
+				.getResultList();
 	}
 
 	@Override
-	public Realisateur insert(Realisateur objet) {
-		// TODO Auto-generated method stub
-		return null;
+	public Realisateur insert(Realisateur r) {
+		entityManager.persist(r);
+		// la clef primaire auto incr?ment? par mysql
+		// remonte dans l'objet java lors du .persist()
+		// grace ? @GeneratedValue() sur l'id de l'Realisateur
+		return r;
 	}
 
 	@Override
-	public void update(Realisateur objet) {
-		// TODO Auto-generated method stub
-		
+	public void update(Realisateur r) {
+		// entityManager.getTransaction().begin() effectu? via @Transactional
+		entityManager.merge(r);
+		// entityManager.getTransaction().commit() effectu? via @Transactional
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+		Realisateur r = entityManager.find(Realisateur.class, id);
+		entityManager.remove(r);
+
 	}
+
 
 }
