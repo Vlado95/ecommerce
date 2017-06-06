@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 // Start of user code (user defined imports)
@@ -25,6 +27,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="ligne_commande")
+@NamedQueries({ @NamedQuery(name = "ligneCommande.all", query = "SELECT f FROM LigneCommande f")})
+
 public class LigneCommande implements Serializable{
 	
 	
@@ -135,6 +139,11 @@ public class LigneCommande implements Serializable{
 	 */
 	public void setFilm(Film newFilm) {
 		this.film = newFilm;
+	}
+	
+	@Override
+	public String toString() {
+		return "LigneCde [id=" + id + ", quantite=" + quantite + ", prix=" + prix + "]";
 	}
 
 }

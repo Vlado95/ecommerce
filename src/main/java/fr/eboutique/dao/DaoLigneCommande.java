@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
+import fr.eboutique.metier.Client;
+import fr.eboutique.metier.Film;
 import fr.eboutique.metier.LigneCommande;
 
 @Component
@@ -19,37 +21,35 @@ public class DaoLigneCommande implements IDao<LigneCommande> {
 	
 	@Override
 	public LigneCommande selectById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(LigneCommande.class,id);
 	}
 
 	@Override
 	public List<LigneCommande> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createNamedQuery("ligneCommande.all", LigneCommande.class).getResultList();
 	}
 
 	@Override
 	public List<LigneCommande> searchLike(String str) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LigneCommande insert(LigneCommande objet) {
-		// TODO Auto-generated method stub
-		return null;
+	public LigneCommande insert(LigneCommande lc) {
+		entityManager.persist(lc);
+		return lc;
 	}
 
 	@Override
-	public void update(LigneCommande objet) {
-		// TODO Auto-generated method stub
+	public void update(LigneCommande lc) {
+		entityManager.merge(lc);
 		
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		LigneCommande lc = entityManager.find(LigneCommande.class, id);
+		entityManager.remove(lc);
 		
 	}
 

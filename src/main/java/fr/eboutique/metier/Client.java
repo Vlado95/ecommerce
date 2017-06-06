@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,6 +29,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="clients")
+@NamedQueries({ @NamedQuery(name = "client.all", query = "SELECT a FROM Acteur a"),
+	@NamedQuery(name = "client.search", query = "SELECT a FROM Client a WHERE a.nom like ?1") })
 public class Client implements Serializable{
 	/**
 	 * Description of the property id.
@@ -44,7 +48,7 @@ public class Client implements Serializable{
 	/**
 	 * Description of the property premon.
 	 */
-	private String premon ;
+	private String prenom ;
 
 	/**
 	 * Description of the property email.
@@ -118,16 +122,16 @@ public class Client implements Serializable{
 	 * Returns premon.
 	 * @return premon 
 	 */
-	public String getPremon() {
-		return this.premon;
+	public String getPrenom() {
+		return this.prenom;
 	}
 
 	/**
 	 * Sets a value to attribute premon. 
 	 * @param newPremon 
 	 */
-	public void setPremon(String newPremon) {
-		this.premon = newPremon;
+	public void setPrenom(String newPrenom) {
+		this.prenom = newPrenom;
 	}
 
 	/**
@@ -200,6 +204,11 @@ public class Client implements Serializable{
 
 	public void setCommandes(List<Commande> commandes) {
 		this.commandes = commandes;
+	}
+	
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + "]";
 	}
 
 	
