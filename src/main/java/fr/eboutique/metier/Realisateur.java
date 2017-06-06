@@ -16,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -55,6 +57,7 @@ public class Realisateur implements Serializable {
 	// End of user code
 
 	//declarer la liste de film par realisateur
+	@JsonIgnore
 	@OneToMany(mappedBy = "realisateur" ,fetch = FetchType.LAZY)
 	private List<Film> films;
 	/**

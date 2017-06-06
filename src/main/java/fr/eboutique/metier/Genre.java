@@ -18,6 +18,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -53,6 +55,7 @@ public class Genre implements Serializable{
 	// End of user code
 	
 	//add collection of Film
+	@JsonIgnore
 	@OneToMany(mappedBy = "genre" ,fetch = FetchType.LAZY)
 	private List<Film> filmsList = new ArrayList<>();
 	
