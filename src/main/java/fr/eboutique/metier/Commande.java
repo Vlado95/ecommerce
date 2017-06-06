@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 // End of user code
@@ -25,6 +27,8 @@ import javax.persistence.OneToMany;
  * @author Fitec
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = "Commande.all", query = "SELECT a FROM Commande a"),
+	@NamedQuery(name = "Commande.search", query = "SELECT a FROM Commande a WHERE a.reference like ?1") })
 public class Commande {
 	/**
 	 * Description of the property id.
@@ -180,6 +184,11 @@ public class Commande {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	
+	@Override
+	public String toString() {
+		return "Commande [id=" + id + ", refCde=" + reference + ", status=" + status  + "]";
 	}
 
 

@@ -30,7 +30,7 @@
 		<nav>
 			<ul>
 				<li><a href="<%=request.getContextPath()%>/films">films</a></li>
-				<li><a href="<%=request.getContextPath()%>/actuurs">Acteurs</a></li>
+				<li><a href="<%=request.getContextPath()%>/acteurs">Acteurs</a></li>
 				<li><a href="<%=request.getContextPath()%>/realisateurs">Realisateur</a></li>
 			</ul>
 		</nav>

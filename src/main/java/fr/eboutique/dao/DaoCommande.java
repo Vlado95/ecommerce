@@ -8,49 +8,49 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
-import fr.eboutique.metier.Acteur;
-import fr.eboutique.metier.Client;
+import fr.eboutique.metier.Commande;
+
+
 
 @Component
 @Transactional
-public class DaoClient implements IDao<Client> {
+public class DaoCommande implements IDao<Commande> {
 
 	@PersistenceContext(unitName = "myPersistenceUnit")
 	private EntityManager entityManager;
 	
 	@Override
-	public Client selectById(int id) {
-		return entityManager.find(Client.class, id);
+	public Commande selectById(int id) {
+		return entityManager.find(Commande.class,id);
 	}
 
 	@Override
-	public List<Client> selectAll() {
-		return entityManager.createNamedQuery("client.all", Client.class).getResultList();
+	public List<Commande> selectAll() {
+		return entityManager.createNamedQuery("Commande.all", Commande.class).getResultList();
 	}
 
 	@Override
-	public List<Client> searchLike(String str) {
-		return entityManager.createNamedQuery("client.search", Client.class).setParameter(1, "%" + str + "%")
+	public List<Commande> searchLike(String str) {
+		return entityManager.createNamedQuery("Commande.search", Commande.class).setParameter(1, "%" + str + "%")
 				.getResultList();
 	}
 
 	@Override
-	public Client insert(Client a) {
+	public Commande insert(Commande a) {
 		entityManager.persist(a);
 		return a;
 	}
 
 	@Override
-	public void update(Client a) {
+	public void update(Commande a) {
 		entityManager.merge(a);
 		
 	}
 
 	@Override
 	public void delete(int id) {
-		Client a = entityManager.find(Client.class, id);
+		Commande a = entityManager.find(Commande.class, id);
 		entityManager.remove(a);
-
 		
 	}
 
