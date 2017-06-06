@@ -22,6 +22,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -92,6 +94,7 @@ public class Film implements Serializable {
 	/**
 	 * Description of the property realisateurs.
 	 */
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_realisateur")
 	private Realisateur realisateur;
@@ -99,17 +102,18 @@ public class Film implements Serializable {
 	/**
 	 * Description of the property genre.
 	 */
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_genre")
 	private Genre genre ;
 	
 
 	//add relatioship between Film and Acteur
+	//@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listFilms")
 	private List<Acteur> listActeurs = new ArrayList<>();
 	
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "film")
 	private List<LigneCommande> listLignesCommande =new ArrayList<>();
 

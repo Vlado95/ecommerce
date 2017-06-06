@@ -16,11 +16,10 @@
 	<context:component-scan base-package="fr.eboutique.*" />
 
 	<bean id='jacksonJsonProvider'
-		class='com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider' />
+		class='com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider' />  <!-- json -->
 
 	<bean id="corsFilter"
 		class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter">
-		<!-- <property name="allowCredentials" value="true"/> -->
 	</bean>
 
 
@@ -30,9 +29,7 @@
 			<ref bean='corsFilter' />
 		</jaxrs:providers>
 		<jaxrs:serviceBeans>
-			<ref bean="serviceFilmRest" /> 
-<!-- 			<ref bean="serviceRealisateurRest"/> -->
-<!-- 			<ref bean="serviceActeurRest" /> -->
+			<ref bean="serviceFilmRest"/><!-- @Component ou @Service sur ServiceFilmRest -->
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 </beans>

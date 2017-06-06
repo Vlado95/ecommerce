@@ -19,6 +19,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -52,6 +54,7 @@ public class Acteur implements Serializable{
 	private String prenom ;
 	
 	//add relationship between Film and Acteur
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinTable(name = "film_acteur", joinColumns = { @JoinColumn(name = "id_film") }, inverseJoinColumns = { @JoinColumn(name = "id_acteur") })
 	private List<Film> listFilms;
