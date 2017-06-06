@@ -112,6 +112,9 @@ public class Genre implements Serializable{
 		this.filmsList = filmsList;
 	}
 	
+	public String toString() {
+		return "Genre [id=" + id + ", nom=" + nom + "]";
+	}
 	
 	
 

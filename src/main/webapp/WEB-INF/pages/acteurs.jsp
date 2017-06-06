@@ -9,8 +9,8 @@
 <body>
 <h1>Title : ${title}</h1>
         <ul>
-            <c:forEach var="acteur" items="${clientList}">
-                <li>${client.nom} </li>
+            <c:forEach var="acteur" items="${acteurList}">
+                <li>${acteur.nom} </li>
             </c:forEach>
         </ul>
 </body>

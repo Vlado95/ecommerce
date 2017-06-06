@@ -29,7 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="clients")
-@NamedQueries({ @NamedQuery(name = "client.all", query = "SELECT a FROM Acteur a"),
+@NamedQueries({ @NamedQuery(name = "client.all", query = "SELECT a FROM Client a"),
 	@NamedQuery(name = "client.search", query = "SELECT a FROM Client a WHERE a.nom like ?1") })
 public class Client implements Serializable{
 	/**

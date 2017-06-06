@@ -3,10 +3,12 @@ package fr.eboutique.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.eboutique.dao.IDao;
 import fr.eboutique.metier.Client;
 
+@Service
 public class ServiceClient implements IService<Client>{
 
 	@Autowired
