@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS ligne_commande (
   PRIMARY KEY (id_lcmd),  
   CONSTRAINT fk_film_cmd
     FOREIGN KEY (id_film )
-    REFERENCES film (id_film)
+    REFERENCES films (id_film)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
