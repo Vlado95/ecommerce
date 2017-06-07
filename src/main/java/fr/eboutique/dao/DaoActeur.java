@@ -4,15 +4,15 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.eboutique.metier.Acteur;
 
 @Component
 @Transactional
-public class DaoActeur implements IDao<Acteur> {
+public class DaoActeur implements IDaoActeur {
 
 	@PersistenceContext(unitName = "myPersistenceUnit")
 	private EntityManager entityManager;

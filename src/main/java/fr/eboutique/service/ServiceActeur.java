@@ -2,21 +2,22 @@ package fr.eboutique.service;
 
 import java.util.List;
 
-import javax.jws.WebService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import fr.eboutique.dao.IDao;
+import fr.eboutique.dao.IDaoActeur;
 import fr.eboutique.metier.Acteur;
 
 
 
 @Service
-public class ServiceActeur implements IService<Acteur> {
+
+@Transactional
+public class ServiceActeur implements IServiceActeur {
 
 	@Autowired
-	private IDao<Acteur> daoActeur;
+	private IDaoActeur daoActeur;
 
 	@Override
 	public Acteur rechercherParId(int id) {
