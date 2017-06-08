@@ -367,9 +367,10 @@ public class Film implements Serializable {
 	public String toString() {
 		return "Film [id=" + id + ", titre=" + titre + ", publics=" + publics + ", prix=" + prix + ", origine="
 				+ origine + ", duree=" + duree + ", format=" + format + ", langue=" + langue + ", quantite=" + quantite
-				+ ", resume=" + resume + ", affiche=" + affiche + ", realisateur=" + realisateur
-				+ ", genre=" + genre + ", listActeurs=" + listActeurs + "]";
+				+ ", resume=" + resume + ", affiche=" + affiche + "]";
 	}
+
+	
 
 	
 

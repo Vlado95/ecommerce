@@ -18,9 +18,9 @@
 	Ajouter un acteur
 </h1>
 
-<c:url var="addAction" value="/acteurs/add" ></c:url>
+<%-- <c:url var="addAction" value="/acteurs/add" ></c:url> --%>
 
-<form:form action="${addAction}" commandName="acteur">
+<form:form method="post" commandName="acteur">
 <table>
 	<c:if test="${!empty acteur.nom}">
 	<tr>
@@ -56,17 +56,14 @@
 		</td>
 	</tr>
 	<tr>
+
 		<td colspan="2">
-			<c:if test="${!empty acteur.nom}">
-				<input type="submit"
-					value="<spring:message text="Edit Acteur"/>" />
-			</c:if>
-			<c:if test="${empty acteur.nom}">
-				<input type="submit"
-					value="<spring:message text="Add Acteur"/>" />
-			</c:if>
+			
+			
+				<button type="submit">${action}</button>
 		</td>
 	</tr>
+
 </table>	
 </form:form>
 <br>

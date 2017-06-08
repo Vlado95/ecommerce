@@ -26,27 +26,49 @@ public class ActeurController  {
 	public String acteurPage( Model model) {
 		List<Acteur> acteurList= serviceActeur.findAll();
 		model.addAttribute("acteurList", acteurList);
+		model.addAttribute("action","addActeur");
 		model.addAttribute("acteur", new Acteur());
 		System.out.println("acteurs"+acteurList);
-		return "/acteurs";
+		return "/pages/acteurs";
 	
 	}
 
 
 	//For add and update acteur both
-		@RequestMapping(value= "acteurs/add", method = RequestMethod.POST)
-		public String ajoutActeur(@ModelAttribute("acteur") Acteur a){
+		@RequestMapping(value= "/acteurs", method = RequestMethod.POST)
+		public String ajoutActeur(@ModelAttribute("acteur") Acteur a,Model model){
 			this.serviceActeur.ajouter(a);
-			System.out.println(a.getNom() +","+a.getPrenom());
-			return "redirect:/acteurs";		
+			//System.out.println(a.getNom() +","+a.getPrenom());
+			model.addAttribute("action","addActeur");
+			return "redirect:/acteurs";	
+
 			
 		}
 		
-		@RequestMapping("/remove/{id}")
-	    public String supprimerActeur(@PathVariable("id") int id){
 			
+		@RequestMapping(value="/remove/{id}", method = RequestMethod.GET)
+	    public String supprimerActeur(@PathVariable("id") int id){
 	        this.serviceActeur.supprimer(id);
 	        return "redirect:/acteurs";
 	    }
+		
+		
+		@RequestMapping(value= "/edit/{id}",  method = RequestMethod.GET)
+		    public String editActeur(@PathVariable("id") int id, Model model){
+				model.addAttribute("action","edit");
+		        model.addAttribute("acteur", this.serviceActeur.rechercherParId(id));
+		        model.addAttribute("acteurList", this.serviceActeur.findAll());
+		        return "/pages/acteurs";
+		 }
+		
+		@RequestMapping(value= "/edit/{id}",  method = RequestMethod.POST)
+	    public String editActeur(@ModelAttribute("acteur") Acteur a, Model model){
+			//Acteur act = new Acteur();
+			model.addAttribute("action","edit");
+	         this.serviceActeur.maj(a);
+	      //  model.addAttribute("acteurList", this.serviceActeur.findAll());
+	        return "redirect:/acteurs";
+	 }
+	
 }
 

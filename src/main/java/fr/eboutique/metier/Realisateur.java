@@ -130,8 +130,10 @@ public class Realisateur implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Realisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", films=" + films + "]";
+		return "Realisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
 	}
+
+	
 	
 	
 
