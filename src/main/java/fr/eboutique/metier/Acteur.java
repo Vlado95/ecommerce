@@ -131,9 +131,14 @@ public class Acteur implements Serializable{
 	public void setListFilms(List<Film> listFilms) {
 		this.listFilms = listFilms;
 	}
-	
-	public String toString(){
-		return "Acteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom  + "]";
+
+	@Override
+	public String toString() {
+		return "Acteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", listFilms=" + listFilms + "]";
 	}
+	
+	
+	
+
 
 }

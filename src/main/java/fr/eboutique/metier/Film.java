@@ -89,7 +89,7 @@ public class Film implements Serializable {
 	 */
 	private String resume;
 
-	private Byte[] affiche;
+	private String affiche;
 
 	/**
 	 * Description of the property realisateurs.
@@ -335,11 +335,11 @@ public class Film implements Serializable {
 		this.publics = publics;
 	}
 
-	public Byte[] getAffiche() {
+	public String getAffiche() {
 		return affiche;
 	}
 
-	public void setAffiche(Byte[] affiche) {
+	public void setAffiche(String affiche) {
 		this.affiche = affiche;
 	}
 
@@ -367,7 +367,7 @@ public class Film implements Serializable {
 	public String toString() {
 		return "Film [id=" + id + ", titre=" + titre + ", publics=" + publics + ", prix=" + prix + ", origine="
 				+ origine + ", duree=" + duree + ", format=" + format + ", langue=" + langue + ", quantite=" + quantite
-				+ ", resume=" + resume + ", affiche=" + Arrays.toString(affiche) + ", realisateur=" + realisateur
+				+ ", resume=" + resume + ", affiche=" + affiche + ", realisateur=" + realisateur
 				+ ", genre=" + genre + ", listActeurs=" + listActeurs + "]";
 	}
 

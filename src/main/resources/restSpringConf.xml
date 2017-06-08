@@ -31,6 +31,11 @@
 		<jaxrs:serviceBeans>
 			<ref bean="serviceFilmRest"/><!-- @Component ou @Service sur ServiceFilmRest -->
 			<ref bean="serviceGenreRest"/>
+			<ref bean="serviceActeurRest"/>
+			<ref bean="serviceRealisateurRest"/>
+			<ref bean="serviceClientRest"/>
+			<ref bean="serviceCommandeRest"/>
+			<ref bean="serviceLigneCommandeRest"/>
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 </beans>

@@ -140,10 +140,12 @@ public class LigneCommande implements Serializable{
 	public void setFilm(Film newFilm) {
 		this.film = newFilm;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "LigneCde [id=" + id + ", quantite=" + quantite + ", prix=" + prix + "]";
+		return "LigneCommande [id=" + id + ", quantite=" + quantite + ", prix=" + prix + ", film=" + film + "]";
 	}
+	
+	
 
 }

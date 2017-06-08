@@ -127,6 +127,11 @@ public class Realisateur implements Serializable {
 	public void setFilms(List<Film> films) {
 		this.films = films;
 	}
+
+	@Override
+	public String toString() {
+		return "Realisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", films=" + films + "]";
+	}
 	
 	
 

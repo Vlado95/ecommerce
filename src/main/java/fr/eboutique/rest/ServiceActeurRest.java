@@ -17,48 +17,47 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import fr.eboutique.metier.Genre;
+import fr.eboutique.metier.Acteur;
 import fr.eboutique.service.IService;
 
-@Path("/genres")
+@Path("/acteurs")
 @Produces("application/json")
 @Consumes("application/json")
 @CrossOriginResourceSharing(allowAllOrigins=true)
 @Component
-public class ServiceGenreRest implements IServiceRest<Genre> {
+public class ServiceActeurRest implements IServiceRest<Acteur> {
 
-	
+
 	@Autowired
-	private IService<Genre> serviceGenre;
-	// service interne ou private IDaoteur daoGenre; // dao interne
+	private IService<Acteur> serviceActeur;
 
 	@Override
 	@GET
 	@Path("/{id}")
-	public Genre rechercher(@PathParam("id") int id) {
-		return serviceGenre.rechercherParId(id);
+	public Acteur rechercher(@PathParam("id") int id) {
+		return serviceActeur.rechercherParId(id);
 	}
 
 	@Override
 	@GET
 	@Path("/all")
-	public List<Genre> getAll() {
-		return serviceGenre.findAll();
+	public List<Acteur> getAll() {
+		return serviceActeur.findAll();
 	}
 
 	@Override
 	@GET
 	@Path("/litlelike/{str}")
-	public List<Genre> getAll(@PathParam("str") String str) {
-		return serviceGenre.chercherParString(str);
+	public List<Acteur> getAll(@PathParam("str") String str) {
+		return serviceActeur.chercherParString(str);
 	}
 	@Override
 	@POST
 	@Path("/")
-	public Response ajouter(Genre genre) {
+	public Response ajouter(Acteur acteur) {
 		try {
-			serviceGenre.ajouter(genre);
-			return Response.status(Status.OK).entity(genre)
+			serviceActeur.ajouter(acteur);
+			return Response.status(Status.OK).entity(acteur)
 					.build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -73,7 +72,7 @@ public class ServiceGenreRest implements IServiceRest<Genre> {
 	@Path("/{id}")
 	public Response supprimer(@PathParam("id") int id) {
 		try {
-			serviceGenre.supprimer(id);
+			serviceActeur.supprimer(id);
 			return Response.status(Status.OK).build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -85,10 +84,10 @@ public class ServiceGenreRest implements IServiceRest<Genre> {
 	@Override
 	@PUT
 	@Path("/{id}")
-	public Response maj(@PathParam("id") int id, Genre genre) {
+	public Response maj(@PathParam("id") int id, Acteur acteur) {
 		try {
-			serviceGenre.maj(genre);;
-			return Response.status(Status.OK).entity(genre).build();
+			serviceActeur.maj(acteur);;
+			return Response.status(Status.OK).entity(acteur).build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

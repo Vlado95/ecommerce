@@ -111,11 +111,13 @@ public class Genre implements Serializable{
 	public void setFilmsList(List<Film> filmsList) {
 		this.filmsList = filmsList;
 	}
-	
+
+	@Override
 	public String toString() {
-		return "Genre [id=" + id + ", nom=" + nom + "]";
+		return "Genre [id=" + id + ", nom=" + nom + ", filmsList=" + filmsList + "]";
 	}
 	
+
 	
 
 }

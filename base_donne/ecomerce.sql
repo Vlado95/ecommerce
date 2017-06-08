@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS films (
   publics VARCHAR(20) NOT NULL,
   origine VARCHAR(20) NOT NULL,
   format VARCHAR(20) NOT NULL,
-  affiche longblob,
+  affiche VARCHAR(500),
   quantite INT(20) NOT NULL,
   prix DOUBLE  NOT NULL,
   PRIMARY KEY (id_film),
