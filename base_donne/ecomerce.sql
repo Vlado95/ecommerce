@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS films (
   publics VARCHAR(20) NOT NULL,
   origine VARCHAR(20) NOT NULL,
   format VARCHAR(20) NOT NULL,
-  affiche longblob,
+  affiche VARCHAR(500) ,
   quantite INT(20) NOT NULL,
   prix DOUBLE  NOT NULL,
   PRIMARY KEY (id_film),
@@ -273,6 +273,15 @@ BEGIN
  SET NEW.email = trim(NEW.email);
 END§
 
+
+DROP TRIGGER IF EXISTS trigger_insert_films_affiche§
+CREATE TRIGGER trigger_insert_films_affiche
+BEFORE INSERT ON films
+FOR EACH ROW
+BEGIN
+-- inseret le nom du photo
+ SET NEW.affiche = concat('film',NEW.id_film);
+END§
 
 
 

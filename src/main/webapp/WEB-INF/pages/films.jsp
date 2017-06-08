@@ -10,13 +10,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
+<%-- 	<sec:authorize access="hasRole('ROLE_ADMIN')"> --%>
 		<h1>Title : ${title}</h1>
 		<ul>
 			<c:forEach var="film" items="${filmList}">
-				<li>${film.titre}</li>
+				<li>${film.titre}
+					<c:forEach var="acteur" items="${film.listActeurs}">
+				${acteur.nom}
+				
+			</c:forEach>
+			</li>
 			</c:forEach>
 		</ul>
-	</sec:authorize>
+<%-- 	</sec:authorize> --%>
 </body>
 </html>
