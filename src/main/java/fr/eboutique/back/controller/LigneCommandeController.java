@@ -20,7 +20,7 @@ public class LigneCommandeController {
 		model.addAttribute("title", "List de tous les films");
 		model.addAttribute("LigneCommandeList", ligneCdeList);
 		System.out.println("lignes"+ligneCdeList);
-		return "/lignesCde";
+		return "pages/lignesCde";
 
 	}
 

@@ -24,7 +24,7 @@ public class CommandeController {
 		model.addAttribute("title", "List de toutes les commandes");
 		model.addAttribute("commandeList", commandeList);
 		System.out.println("commandes"+commandeList);
-		return "/commandes";
+		return "pages/commandes";
 
 	}
 

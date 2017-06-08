@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import fr.eboutique.metier.Genre;
 import fr.eboutique.service.IService;
 
-@Path("/Genres")
+@Path("/genres")
 @Produces("application/json")
 @Consumes("application/json")
 @CrossOriginResourceSharing(allowAllOrigins=true)

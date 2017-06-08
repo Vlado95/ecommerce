@@ -23,7 +23,7 @@ public class FilmController  {
 		model.addAttribute("title", "List de tous les films");
 		model.addAttribute("filmList", filmList);
 		System.out.println("films"+filmList);
-		return "/films";
+		return "pages/films";
 
 	}
 	

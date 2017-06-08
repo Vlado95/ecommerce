@@ -17,7 +17,7 @@ public class MainController {
 	public String defaultPage(Model model) {
 		model.addAttribute("title", "Page d'acceuil");
 		model.addAttribute("message", "This is default page!");
-		return "/index";
+		return "pages/index";
 
 	}
 
@@ -26,7 +26,7 @@ public class MainController {
 		model.addAttribute("title", "Spring Security Login Form - Database Authentication");
 		model.addAttribute("message", "This page is for ROLE_ADMIN only!");
 
-		return "/admin";
+		return "admin/admin";
 
 	}
 
@@ -41,7 +41,7 @@ public class MainController {
 			model.addAttribute("msg", "You've been logged out successfully.");
 		}
 
-		return "/login";
+		return "pages/login";
 
 	}
 	

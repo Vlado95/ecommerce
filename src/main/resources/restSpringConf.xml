@@ -30,6 +30,7 @@
 		</jaxrs:providers>
 		<jaxrs:serviceBeans>
 			<ref bean="serviceFilmRest"/><!-- @Component ou @Service sur ServiceFilmRest -->
+			<ref bean="serviceGenreRest"/>
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 </beans>

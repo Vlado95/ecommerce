@@ -23,7 +23,7 @@ public class ClientController {
 		model.addAttribute("title", "List de tous les clients");
 		model.addAttribute("clientList", clientList);
 		System.out.println("clients "+clientList);
-		return "/clients";
+		return "pages/clients";
 	
 	}
 

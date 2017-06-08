@@ -23,7 +23,7 @@ public class RealisateurController  {
 		model.addAttribute("title", "List de tous les realisateurs");
 		model.addAttribute("realisateurList", realisateurList);
 		System.out.println("realisateurs"+realisateurList);
-		return "/realisateurs";
+		return "pages/realisateurs";
 
 	}
 }

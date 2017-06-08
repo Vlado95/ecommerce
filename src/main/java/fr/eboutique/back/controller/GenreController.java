@@ -24,7 +24,7 @@ public class GenreController {
 		model.addAttribute("title", "List de tous les genres");
 		model.addAttribute("genreList", genreList);
 		System.out.println("genres"+genreList);
-		return "/genres";
+		return "pages/genres";
 
 	}
 	
