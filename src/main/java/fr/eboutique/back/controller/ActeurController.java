@@ -28,7 +28,6 @@ public class ActeurController  {
 		model.addAttribute("acteurList", acteurList);
 		model.addAttribute("action","addActeur");
 		model.addAttribute("acteur", new Acteur());
-		System.out.println("acteurs"+acteurList);
 		return "/pages/acteurs";
 	
 	}
@@ -38,7 +37,6 @@ public class ActeurController  {
 		@RequestMapping(value= "/acteurs", method = RequestMethod.POST)
 		public String ajoutActeur(@ModelAttribute("acteur") Acteur a,Model model){
 			this.serviceActeur.ajouter(a);
-			//System.out.println(a.getNom() +","+a.getPrenom());
 			model.addAttribute("action","addActeur");
 			return "redirect:/acteurs";	
 

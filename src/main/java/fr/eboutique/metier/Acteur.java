@@ -134,7 +134,7 @@ public class Acteur implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Acteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", listFilms=" + listFilms + "]";
+		return "Acteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom +  "]";
 	}
 	
 	

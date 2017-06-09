@@ -56,11 +56,7 @@ CREATE TABLE IF NOT EXISTS films (
   publics VARCHAR(20) NOT NULL,
   origine VARCHAR(20) NOT NULL,
   format VARCHAR(20) NOT NULL,
-<<<<<<< HEAD
   affiche VARCHAR(500) ,
-=======
-  affiche VARCHAR(500),
->>>>>>> branch 'securityBack' of https://github.com/Vlado95/ecommerce.git
   quantite INT(20) NOT NULL,
   prix DOUBLE  NOT NULL,
   PRIMARY KEY (id_film),
@@ -287,6 +283,15 @@ BEGIN
  SET NEW.affiche = concat('film',NEW.id_film);
 END§
 
+
+DROP TRIGGER IF EXISTS trigger_update_films_affiche§
+CREATE TRIGGER trigger_update_films_affiche
+BEFORE UPDATE ON films
+FOR EACH ROW
+BEGIN
+-- inseret le nom du photo
+ SET NEW.affiche = concat('film',NEW.id_film);
+END§
 
 
 DROP TRIGGER IF EXISTS trigger_insert_commende§

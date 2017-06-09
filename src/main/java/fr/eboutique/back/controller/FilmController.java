@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fr.eboutique.metier.Acteur;
 import fr.eboutique.metier.Film;
 import fr.eboutique.metier.Genre;
+import fr.eboutique.metier.Realisateur;
 import fr.eboutique.metier.Film;
 import fr.eboutique.service.IService;
 
@@ -29,6 +30,9 @@ public class FilmController  {
 	@Autowired
 	private IService<Acteur> serviceActeur;
 	
+	@Autowired
+	private IService<Realisateur> serviceRealisateur;
+	
 	//list films
 	@RequestMapping(value = "/films", method = RequestMethod.GET)
 	public String filmPage( Model model) {
@@ -36,18 +40,15 @@ public class FilmController  {
 		model.addAttribute("filmList", filmList); 
 		model.addAttribute("action","addFilm");
 		model.addAttribute("film", new Film());
-		for (int i = 1; i < filmList.size(); i++) {
-			System.out.println("acteur"+filmList.get(i));
-		}
-		System.out.println("films"+filmList);
 		return "pages/films";
 	}
 
 	//add film
 		@RequestMapping(value= "/films", method = RequestMethod.POST)
-		public String ajoutFilm(@ModelAttribute("film") Film f,Model model){
-			this.serviceFilm.ajouter(f);
-			//System.out.println(a.getNom() +","+a.getPrenom());
+		public String ajoutFilm(@ModelAttribute("film") Film film,Model model){
+			System.out.println("ajouter un film");
+			 Film fil = serviceFilm.ajouter(film);
+			System.out.println("film ajouter: "+fil.getTitre());
 			model.addAttribute("action","addFilm");
 			return "redirect:/films";	
 
@@ -90,6 +91,15 @@ public class FilmController  {
 		        List<Acteur> acteurs = serviceActeur.findAll();
 		        return acteurs;
 		 }
+		 
+		 
+		 @ModelAttribute("realisateurs")
+		    public List<Realisateur> GetRealisateur() throws SQLException {
+		        List<Realisateur> realisateurs = serviceRealisateur.findAll();
+		        return realisateurs;
+		 }
+		 
+		 
 	
 	
 
