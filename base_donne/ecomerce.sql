@@ -56,7 +56,11 @@ CREATE TABLE IF NOT EXISTS films (
   publics VARCHAR(20) NOT NULL,
   origine VARCHAR(20) NOT NULL,
   format VARCHAR(20) NOT NULL,
+<<<<<<< HEAD
   affiche VARCHAR(500) ,
+=======
+  affiche VARCHAR(500),
+>>>>>>> branch 'securityBack' of https://github.com/Vlado95/ecommerce.git
   quantite INT(20) NOT NULL,
   prix DOUBLE  NOT NULL,
   PRIMARY KEY (id_film),

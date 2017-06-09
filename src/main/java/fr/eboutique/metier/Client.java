@@ -18,6 +18,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -71,6 +73,7 @@ public class Client implements Serializable{
 	@Column(name="pwd")
 	private String mdp ;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
 	private List<Commande> commandes = new ArrayList<>();
 
@@ -205,11 +208,15 @@ public class Client implements Serializable{
 	public void setCommandes(List<Commande> commandes) {
 		this.commandes = commandes;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + "]";
+		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", adresse=" + adresse
+				+ ", telephone=" + telephone + ", mdp=" + mdp + ", commandes=" + commandes + "]";
 	}
+	
+
+	
 
 	
 }

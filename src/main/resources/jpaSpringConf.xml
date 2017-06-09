@@ -37,5 +37,6 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- prend en compte les @Transactional dans le code java -->
  	<tx:annotation-driven transaction-manager="transactionManager" /> 
+ 	
 
 </beans>

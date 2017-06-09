@@ -12,7 +12,6 @@ import fr.eboutique.metier.Acteur;
 
 
 @Service
-
 @Transactional
 public class ServiceActeur implements IServiceActeur {
 
@@ -35,6 +34,7 @@ public class ServiceActeur implements IServiceActeur {
 	}
 
 	@Override
+	
 	public Acteur ajouter(Acteur acteur) {
 		return daoActeur.insert(acteur);
 	}

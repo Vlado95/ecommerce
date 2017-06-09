@@ -185,11 +185,16 @@ public class Commande {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Commande [id=" + id + ", refCde=" + reference + ", status=" + status  + "]";
+		return "Commande [id=" + id + ", status=" + status + ", fraisPort=" + fraisPort + ", montantTotal="
+				+ montantTotal + ", DateCmd=" + DateCmd + ", delaisLivraison=" + delaisLivraison + ", adresseLivraison="
+				+ adresseLivraison + ", ligneCommandes=" + ligneCommandes + ", reference=" + reference + ", client="
+				+ client + "]";
 	}
+	
+	
 
 
 
