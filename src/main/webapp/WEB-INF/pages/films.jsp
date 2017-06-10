@@ -131,7 +131,7 @@
 							</c:forEach>
 						</form:select> 
 						<label>Acteurs :</label> <select name="listIdActeur"
-						multiple="true" size="2">
+						multiple="true" size="10">
 							<c:forEach items="${acteurs}" var="acteur">
 								<option value="${acteur.id}">${acteur.nom}</option>
 							</c:forEach>

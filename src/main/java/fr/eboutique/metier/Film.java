@@ -112,7 +112,7 @@ public class Film implements Serializable {
 
 	//add relatioship between Film and Acteur
 	//@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "film_acteur", 
 	joinColumns = @JoinColumn(name = "id_film",referencedColumnName="id_film"), 
 	inverseJoinColumns =@JoinColumn(name = "id_acteur",referencedColumnName="id_acteur"))
