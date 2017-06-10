@@ -120,34 +120,24 @@
 				</tr>
 				<tr>
 
-					<td colspan="2">
-
-
-						
-						<label>Genre :</label> <form:select
+					<td colspan="2"><label>Genre :</label> <form:select
 							path="genre.id">
 							<c:forEach items="${genres}" var="genre">
 								<form:option value="${genre.id}">${genre.nom}</form:option>
 							</c:forEach>
-						</form:select>
-						
-						<label>Realisateur :</label> <form:select
-							path="realisateur.id">
+						</form:select> <label>Realisateur :</label> <form:select path="realisateur.id">
 							<c:forEach items="${realisateurs}" var="realisateur">
 								<form:option value="${realisateur.id}">${realisateur.nom}</form:option>
 							</c:forEach>
-						</form:select>
-						
-						 <label>Acteurs :</label> <select path="acteur.id" multiple
-						size="2">
+						</form:select> 
+						<label>Acteurs :</label> <select name="listIdActeur"
+						multiple="true" size="2">
 							<c:forEach items="${acteurs}" var="acteur">
 								<option value="${acteur.id}">${acteur.nom}</option>
 							</c:forEach>
-					</select>
+							<select>
 
-                      <button type="submit">${action}</button> 
-
-					</td>
+								<button type="submit">${action}</button></td>
 				</tr>
 
 			</table>
@@ -186,8 +176,8 @@
 									<li>${acteur.nom}</li>
 								</ul>
 							</c:forEach></td>
-						<td><a href="<c:url value='/edit/${film.id}' />">Edit</a></td>
-						<td><a href="<c:url value='/remove/${film.id}' />">Delete</a></td>
+						<td><a href="<c:url value='/editFilm/${film.id}' />">Edit</a></td>
+						<td><a href="<c:url value='/removeFilm/${film.id}' />">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>

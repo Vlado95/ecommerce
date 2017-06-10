@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -110,7 +112,10 @@ public class Film implements Serializable {
 
 	//add relatioship between Film and Acteur
 	//@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listFilms")
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinTable(name = "film_acteur", 
+	joinColumns = @JoinColumn(name = "id_film",referencedColumnName="id_film"), 
+	inverseJoinColumns =@JoinColumn(name = "id_acteur",referencedColumnName="id_acteur"))
 	private List<Acteur> listActeurs = new ArrayList<>();
 	
 	@JsonIgnore

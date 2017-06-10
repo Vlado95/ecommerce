@@ -1,15 +1,22 @@
 package fr.eboutique.back.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eboutique.metier.Acteur;
 import fr.eboutique.metier.Film;
@@ -45,8 +52,13 @@ public class FilmController  {
 
 	//add film
 		@RequestMapping(value= "/films", method = RequestMethod.POST)
-		public String ajoutFilm(@ModelAttribute("film") Film film,Model model){
-			System.out.println("ajouter un film");
+		public String ajoutFilm(@ModelAttribute("film") Film film,Model model, @RequestParam("listIdActeur") List<Integer> listIdActeur){
+			System.out.println("ajouter un film"+listIdActeur);
+			List<Acteur> acteurs = new ArrayList<Acteur>();
+			for(Integer id : listIdActeur){
+				 acteurs.add(serviceActeur.rechercherParId(id));	
+			}
+			film.setListActeurs(acteurs);
 			 Film fil = serviceFilm.ajouter(film);
 			System.out.println("film ajouter: "+fil.getTitre());
 			model.addAttribute("action","addFilm");
@@ -72,8 +84,13 @@ public class FilmController  {
 		 }
 		
 		@RequestMapping(value= "/editFilm/{id}",  method = RequestMethod.POST)
-	    public String editFilm(@ModelAttribute("film") Film f, Model model){
+	    public String editFilm(@ModelAttribute("film") Film f, Model model, @RequestParam("listIdActeur") List<Integer> listIdActeur){
 			//Film act = new Film();
+			List<Acteur> acteurs = new ArrayList<Acteur>();
+			for(Integer id : listIdActeur){
+				 acteurs.add(serviceActeur.rechercherParId(id));	
+			}
+			f.setListActeurs(acteurs);
 			model.addAttribute("action","editFilm");
 	         this.serviceFilm.maj(f);
 	      //  model.addAttribute("FilmList", this.serviceFilm.findAll());
@@ -98,6 +115,37 @@ public class FilmController  {
 		        List<Realisateur> realisateurs = serviceRealisateur.findAll();
 		        return realisateurs;
 		 }
+		 
+		 
+//		 @InitBinder
+//		    protected void initBinder(WebDataBinder binder) {
+//		        binder.registerCustomEditor(Set.class, "listActeurs", new CustomCollectionEditor(Set.class)
+//		          {
+//		            @Override
+//		            protected Object convertElement(Object element)
+//		            {
+//		                Integer id = null;
+//
+//		                if(element instanceof String && !((String)element).equals("")){
+//		                    //From the JSP 'element' will be a String
+//		                    try{
+//		                        id = Integer.parseInt((String) element);
+//		                    }
+//		                    catch (NumberFormatException e) {
+//		                        System.out.println("Element was " + ((String) element));
+//		                        e.printStackTrace();
+//		                    }
+//		                }
+//		                else if(element instanceof Integer) {
+//		                    //From the database 'element' will be a Long
+//		                    id = (Integer) element;
+//		                }
+//
+//		                return id != null ? serviceActeur.rechercherParId(id) : null;
+//		            }
+//		          });
+//		    }
+	
 		 
 		 
 	

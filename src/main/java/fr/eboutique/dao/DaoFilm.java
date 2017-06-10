@@ -35,7 +35,7 @@ public class DaoFilm implements IDao<Film> {
 
 	@Override
 	public Film insert(Film film) {
-		entityManager.persist(film);
+		entityManager.merge(film);
 		return film;
 	}
 
