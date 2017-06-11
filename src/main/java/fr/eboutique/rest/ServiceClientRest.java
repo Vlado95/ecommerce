@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import fr.eboutique.metier.Client;
 import fr.eboutique.service.IService;
+import fr.eboutique.service.IServiceClient;
 
 @Path("/clients")
 @Produces("application/json")
@@ -30,7 +31,7 @@ public class ServiceClientRest implements IServiceRest<Client>{
 
 
 	@Autowired
-	private IService<Client> serviceClient;
+	private IServiceClient serviceClient;
 
 	@Override
 	@GET
@@ -52,6 +53,14 @@ public class ServiceClientRest implements IServiceRest<Client>{
 	public List<Client> getAll(@PathParam("str") String str) {
 		return serviceClient.chercherParString(str);
 	}
+	
+	
+	@GET
+	@Path("/authentification/{email}/{mdp}")
+	public Client getAll(@PathParam("email") String email,@PathParam("mdp") String mdp ) {
+		return serviceClient.rechercherEmailMdp(email, mdp);
+	}
+	
 	@Override
 	@POST
 	@Path("/")

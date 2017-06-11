@@ -5,19 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.eboutique.dao.IDao;
 import fr.eboutique.metier.Client;
 
 @Service
-public class ServiceClient implements IService<Client>{
+public class ServiceClient implements IServiceClient{
 
 	@Autowired
-	private IDao<Client> daoClient;
+	private IDaoClient daoClient;
 
 	@Override
 	public Client rechercherParId(int id) {
 		return daoClient.selectById(id);
 	}
+	
+	@Override
+	public Client rechercherEmailMdp(String email, String mdp) {
+		return daoClient.findByEmailPdw(email, mdp);
+	}
+	
 
 	@Override
 	public List<Client> findAll() {

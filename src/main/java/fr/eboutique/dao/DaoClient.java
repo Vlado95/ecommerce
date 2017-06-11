@@ -10,10 +10,11 @@ import org.springframework.stereotype.Component;
 
 import fr.eboutique.metier.Acteur;
 import fr.eboutique.metier.Client;
+import fr.eboutique.service.IDaoClient;
 
 @Component
 @Transactional
-public class DaoClient implements IDao<Client> {
+public class DaoClient implements IDaoClient {
 
 	@PersistenceContext(unitName = "myPersistenceUnit")
 	private EntityManager entityManager;
@@ -23,6 +24,12 @@ public class DaoClient implements IDao<Client> {
 		return entityManager.find(Client.class, id);
 	}
 
+	@Override
+	public Client findByEmailPdw(String email, String pdw) {
+		return entityManager.createNamedQuery("client.byEmailPwd", Client.class).setParameter(1, email).setParameter(2, pdw)
+				.getSingleResult();
+	}
+	
 	@Override
 	public List<Client> selectAll() {
 		return entityManager.createNamedQuery("client.all", Client.class).getResultList();
@@ -36,7 +43,7 @@ public class DaoClient implements IDao<Client> {
 
 	@Override
 	public Client insert(Client a) {
-		entityManager.persist(a);
+		entityManager.merge(a);
 		return a;
 	}
 
@@ -53,5 +60,6 @@ public class DaoClient implements IDao<Client> {
 
 		
 	}
+
 
 }

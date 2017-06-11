@@ -32,7 +32,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="clients")
 @NamedQueries({ @NamedQuery(name = "client.all", query = "SELECT a FROM Client a"),
-	@NamedQuery(name = "client.search", query = "SELECT a FROM Client a WHERE a.nom like ?1") })
+	@NamedQuery(name = "client.search", query = "SELECT a FROM Client a WHERE a.nom like ?1"),
+	@NamedQuery(name = "client.byEmailPwd", query = "SELECT c FROM Client c WHERE c.email = ?1 AND c.mdp = ?2")})
 public class Client implements Serializable{
 	/**
 	 * Description of the property id.
@@ -85,6 +86,8 @@ public class Client implements Serializable{
 		super();
 		// End of user code
 	}
+
+
 
 	// Start of user code (user defined methods for Client)
 
