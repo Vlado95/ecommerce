@@ -50,7 +50,7 @@ public class ServiceFilmRest implements IServiceRest<Film> {
 
 	@Override
 	@GET
-	@Path("/litlelike/{str}")
+	@Path("/titlelike/{str}")
 	public List<Film> getAll(@PathParam("str") String str) {
 		return serviceFilm.chercherParString(str);
 	}

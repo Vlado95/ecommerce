@@ -17,6 +17,7 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.eboutique.metier.Film;
 import fr.eboutique.metier.Genre;
 import fr.eboutique.service.IService;
 
@@ -25,7 +26,7 @@ import fr.eboutique.service.IService;
 @Consumes("application/json")
 @CrossOriginResourceSharing(allowAllOrigins=true)
 @Component
-public class ServiceGenreRest implements IServiceRest<Genre> {
+public class ServiceGenreRest implements IServiceRestGenre {
 
 	
 	@Autowired
@@ -38,6 +39,16 @@ public class ServiceGenreRest implements IServiceRest<Genre> {
 	public Genre rechercher(@PathParam("id") int id) {
 		return serviceGenre.rechercherParId(id);
 	}
+	
+	
+	@Override
+	@GET
+	@Path("films/{idGenre}")
+	public List<Film> rechercheFilmParCat(@PathParam("idGenre") Integer idGenre) {
+		// TODO Auto-generated method stub
+		return serviceGenre.rechercherParId(idGenre).getFilmsList();
+	}
+	
 
 	@Override
 	@GET
@@ -95,4 +106,6 @@ public class ServiceGenreRest implements IServiceRest<Genre> {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 	}
+
+
 }

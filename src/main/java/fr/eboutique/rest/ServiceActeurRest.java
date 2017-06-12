@@ -1,5 +1,6 @@
 package fr.eboutique.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.eboutique.metier.Acteur;
+import fr.eboutique.metier.Film;
 import fr.eboutique.service.IService;
 
 @Path("/acteurs")
@@ -47,10 +49,21 @@ public class ServiceActeurRest implements IServiceRest<Acteur> {
 
 	@Override
 	@GET
-	@Path("/litlelike/{str}")
+	@Path("/actorlike/{str}")
 	public List<Acteur> getAll(@PathParam("str") String str) {
 		return serviceActeur.chercherParString(str);
 	}
+	
+	@GET
+	@Path("/films/actorLike/{str}")
+	public List<Film> getFilmsActeur(@PathParam("str") String str) {
+		List<Film> films = new ArrayList<>();
+		for(Acteur a : serviceActeur.chercherParString(str)){
+			films.addAll(a.getListFilms());
+		}
+		return films;
+	}
+	
 	@Override
 	@POST
 	@Path("/")

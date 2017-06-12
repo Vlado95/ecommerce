@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = "acteur.all", query = "SELECT a FROM Acteur a"),
-	@NamedQuery(name = "acteur.search", query = "SELECT a FROM Acteur a WHERE a.nom like ?1") })
+	@NamedQuery(name = "acteur.search", query = "SELECT a FROM Acteur a WHERE a.nom like ?1 OR a.prenom like ?1") })
 public class Acteur implements Serializable{
 	private static final long serialVersionUID = 1L; 
 	/**
