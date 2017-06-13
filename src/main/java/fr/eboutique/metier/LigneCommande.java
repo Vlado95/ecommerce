@@ -16,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -47,7 +49,11 @@ public class LigneCommande implements Serializable{
 	 * Description of the property quantite.
 	 */
 	private Integer quantite = 0;
-
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "id_commande")
+	private Commande commande;
+	
 	/**
 	 * Description of the property prix.
 	 */
@@ -107,6 +113,14 @@ public class LigneCommande implements Serializable{
 	 */
 	public void setPrix(Double newPrix) {
 		this.prix = newPrix;
+	}
+
+	public Commande getCommande() {
+		return commande;
+	}
+
+	public void setCommande(Commande commande) {
+		this.commande = commande;
 	}
 
 	/**

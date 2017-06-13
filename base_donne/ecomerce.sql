@@ -88,25 +88,12 @@ CREATE TABLE IF NOT EXISTS clients (
   UNIQUE INDEX email_UNIQUE (email ASC))
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
 
--- ligne_commande
-CREATE TABLE IF NOT EXISTS ligne_commande (
-  id_lcmd INT(20) NOT NULL AUTO_INCREMENT,
-  id_film INT(20) NOT NULL,
-  quantite INT(20) NOT NULL,
-  prix DOUBLE NOT NULL,
-  PRIMARY KEY (id_lcmd),  
-  CONSTRAINT fk_film_cmd
-    FOREIGN KEY (id_film )
-    REFERENCES films (id_film)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
 
 -- commande
 CREATE TABLE IF NOT EXISTS commande (
   id_commande INT(20) NOT NULL AUTO_INCREMENT,
   ref_cmd VARCHAR(255) NOT NULL,
-  id_lcmd INT(20) NOT NULL,
   id_client INT(20) NOT NULL,
   date_cmd DATETIME NOT NULL,
   status VARCHAR(45) NOT NULL,
@@ -116,17 +103,35 @@ CREATE TABLE IF NOT EXISTS commande (
   montant_total DOUBLE NOT NULL,
   PRIMARY KEY (id_commande),
   UNIQUE INDEX ref_UNIQUE (ref_cmd),
-   CONSTRAINT fk_id_lcmd_cmd
-    FOREIGN KEY (id_lcmd)
-    REFERENCES ligne_commande (id_lcmd)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT fk_client_cmd
     FOREIGN KEY (id_client)
     REFERENCES clients(id_client)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+
+-- ligne_commande
+CREATE TABLE IF NOT EXISTS ligne_commande (
+  id_lcmd INT(20) NOT NULL AUTO_INCREMENT,
+  id_film INT(20) NOT NULL,
+  id_commande INT(20) NOT NULL,
+  quantite INT(20) NOT NULL,
+  prix DOUBLE NOT NULL,
+  PRIMARY KEY (id_lcmd),  
+  CONSTRAINT fk_film_cmd
+    FOREIGN KEY (id_film )
+    REFERENCES films (id_film)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_lcmd_cmd
+    FOREIGN KEY (id_commande )
+    REFERENCES commande(id_commande)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT CHARSET=latin1 §
+
+
 
 
 

@@ -1,6 +1,5 @@
-package fr.eboutique.service;
+package fr.eboutique.dao;
 
-import fr.eboutique.dao.IDao;
 import fr.eboutique.metier.Client;
 
 public interface IDaoClient extends IDao<Client>{

@@ -1,5 +1,6 @@
 package fr.eboutique.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import fr.eboutique.metier.Client;
+import fr.eboutique.metier.Commande;
 import fr.eboutique.metier.Film;
 import fr.eboutique.metier.LigneCommande;
 
@@ -36,7 +38,13 @@ public class DaoLigneCommande implements IDao<LigneCommande> {
 
 	@Override
 	public LigneCommande insert(LigneCommande lc) {
-		entityManager.persist(lc);
+		
+		  Commande cmd = lc.getCommande();
+		   entityManager.merge(cmd );
+		   
+		   lc.setCommande(cmd);
+		   entityManager.persist(lc);
+		  
 		return lc;
 	}
 

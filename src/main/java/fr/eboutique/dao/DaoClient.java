@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import fr.eboutique.metier.Acteur;
 import fr.eboutique.metier.Client;
-import fr.eboutique.service.IDaoClient;
 
 @Component
 @Transactional

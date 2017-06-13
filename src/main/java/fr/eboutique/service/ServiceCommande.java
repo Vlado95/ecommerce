@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.eboutique.dao.IDao;
+import fr.eboutique.dao.IDaoCommande;
 import fr.eboutique.metier.Commande;
+import fr.eboutique.metier.LigneCommande;
 
 @Service
-public class ServiceCommande implements IService<Commande>{
+public class ServiceCommande implements IServiceCommande{
+
 
 	@Autowired
-	private IDao<Commande> daoCommande;
+	private IDaoCommande daoCommande;
 
 	@Override
 	public Commande rechercherParId(int id) {
@@ -44,6 +47,12 @@ public class ServiceCommande implements IService<Commande>{
 	public void supprimer(int idCommande) {
 		daoCommande.delete(idCommande);
 
+	}
+
+	@Override
+	public Commande enregistrerCommande(Commande commande, List<LigneCommande> lcmds) {
+		
+		return daoCommande.enregistrerCommande(commande, lcmds);
 	}
 
 	

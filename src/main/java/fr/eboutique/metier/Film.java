@@ -118,8 +118,8 @@ public class Film implements Serializable {
 	inverseJoinColumns =@JoinColumn(name = "id_acteur",referencedColumnName="id_acteur"))
 	private List<Acteur> listActeurs = new ArrayList<>();
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "film")
+//	@JsonIgnore
+	@OneToMany(mappedBy = "film",cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<LigneCommande> listLignesCommande =new ArrayList<>();
 
 	
@@ -167,37 +167,23 @@ public class Film implements Serializable {
 	    this.publics = newPublic;
 	}
 
-	/**
-	 * Returns id.
-	 * @return id 
-	 */
-	public Integer getId() {
-		return this.id;
-	}
-
-	/**
-	 * Sets a value to attribute id. 
-	 * @param newId 
-	 */
-	public void setId(int newId) {
-		this.id = newId;
-	}
 
 	/**
 	 * Returns prix.
 	 * @return prix 
 	 */
-	public double getPrix() {
-		return this.prix;
-	}
+//	public double getPrix() {
+//		return this.prix;
+//	}
 
 	/**
 	 * Sets a value to attribute prix. 
 	 * @param newPrix 
 	 */
-	public void setPrix(double newPrix) {
-		this.prix = newPrix;
-	}
+//	public void setPrix(double newPrix) {
+//		this.prix = newPrix;
+//	}
+	
 
 	/**
 	 * Returns origine.
@@ -205,6 +191,26 @@ public class Film implements Serializable {
 	 */
 	public String getOrigine() {
 		return this.origine;
+	}
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+
+//	public List<LigneCommande> getListLignesCommande() {
+//		return listLignesCommande;
+//	}
+//
+//	public void setListLignesCommande(List<LigneCommande> listLignesCommande) {
+//		this.listLignesCommande = listLignesCommande;
+//	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	/**

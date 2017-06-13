@@ -17,6 +17,7 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.eboutique.metier.Commande;
 import fr.eboutique.metier.LigneCommande;
 import fr.eboutique.service.IService;
 
@@ -66,6 +67,28 @@ public class ServiceLigneCommandeRest implements IServiceRest<LigneCommande>{
 			// return Response.status(Status.BAD_REQUEST).build();
 		}
 	}
+	
+	
+//	@POST
+//	@Path("lcmd/")
+//	public Response ajouterListe(List<LigneCommande> ligneCommandes) {
+//		Commande cmd = new Commande();
+//		for (LigneCommande ligneCommande : ligneCommandes){
+//			cmd = ligneCommande.getCommande();
+//		}
+//		System.out.println("cmd ");
+//		
+//		try {
+//			serviceLigneCommande.ajouter(ligneCommande);
+//			return Response.status(Status.OK).entity(ligneCommande)
+//					.build();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return Response.status(Status.NOT_FOUND).build();
+//			// return Response.status(Status.BAD_REQUEST).build();
+//		}
+//	}
 
 	@Override
 	@DELETE

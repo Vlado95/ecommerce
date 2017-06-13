@@ -18,18 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.eboutique.metier.Commande;
-import fr.eboutique.service.IService;
+import fr.eboutique.metier.LigneCommande;
+import fr.eboutique.service.IServiceCommande;
 
 @Path("/commandes")
 @Produces("application/json")
 @Consumes("application/json")
 @CrossOriginResourceSharing(allowAllOrigins=true)
 @Component
-public class ServiceCommandeRest implements IServiceRest<Commande>{
+public class ServiceCommandeRest implements IServiceCommandeRest{
 
 
 	@Autowired
-	private IService<Commande> serviceCommande;
+	private IServiceCommande serviceCommande;
 
 	@Override
 	@GET
@@ -56,6 +57,10 @@ public class ServiceCommandeRest implements IServiceRest<Commande>{
 	@Path("/")
 	public Response ajouter(Commande commande) {
 		try {
+			for(LigneCommande lc : commande.getLigneCommandes()){
+				System.out.println("commade"+lc );	
+			}
+			
 			serviceCommande.ajouter(commande);
 			return Response.status(Status.OK).entity(commande)
 					.build();
@@ -92,6 +97,26 @@ public class ServiceCommandeRest implements IServiceRest<Commande>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Response.status(Status.NOT_FOUND).build();
+		}
+	}
+
+
+	@Override
+	@POST
+	@Path("client/")
+	public Response enregistrerCommande(Commande commande, List<LigneCommande> lcmds) {
+		try {
+			   for(LigneCommande lcmd : lcmds){
+				   System.out.println("ligne commande à ajouter: "+lcmd);
+			   }
+			serviceCommande.enregistrerCommande(commande, lcmds);
+			return Response.status(Status.OK).entity(commande)
+					.build();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(Status.NOT_FOUND).build();
+			// return Response.status(Status.BAD_REQUEST).build();
 		}
 	}
 }

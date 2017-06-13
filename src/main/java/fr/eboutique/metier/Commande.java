@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 // Start of user code (user defined imports)
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 // End of user code
 
@@ -76,8 +79,8 @@ public class Commande {
 	/**
 	 * Description of the property ligneCommandes.
 	 */
-	@OneToMany
-	@JoinColumn(name="id_lcmd")
+	
+	@OneToMany(mappedBy="commande")
 	private List<LigneCommande> ligneCommandes = new ArrayList();
 
 	/**
