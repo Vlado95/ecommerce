@@ -31,7 +31,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = "Commande.all", query = "SELECT a FROM Commande a"),
-	@NamedQuery(name = "Commande.search", query = "SELECT a FROM Commande a WHERE a.reference like ?1") })
+	@NamedQuery(name = "Commande.search", query = "SELECT a FROM Commande a WHERE a.reference like ?1"),
+    @NamedQuery(name = "Commande.searchByClient", query = "SELECT a FROM Commande a  JOIN a.client c WHERE c.id = ?1")})
 public class Commande {
 	/**
 	 * Description of the property id.

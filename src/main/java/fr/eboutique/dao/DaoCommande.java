@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
-
+import fr.eboutique.metier.Client;
 import fr.eboutique.metier.Commande;
 import fr.eboutique.metier.LigneCommande;
 
@@ -86,20 +86,10 @@ public class DaoCommande implements IDaoCommande {
 	}
 	
 	@Override
-	public Commande enregistrerCommande(Commande commande, List<LigneCommande> lcmds) {
-		List<LigneCommande> lcmd2 = new ArrayList<LigneCommande>();
-		   for(LigneCommande lcmd : lcmds){
-			   entityManager.merge(lcmd);
-			   lcmd2.add(lcmd);
-			   System.out.println();
-		   }
-		   for(LigneCommande lcmd : lcmd2){
-			   System.out.println("ligne commande à ajouter: "+lcmd);
-		   }
-			
-		   commande.setLigneCommandes(lcmd2);
-		   entityManager.merge(commande);
-			return commande;
+	public List<Commande> rechercheCommandaClient(Integer client) {
+		return entityManager.createNamedQuery("Commande.searchByClient", Commande.class).setParameter(1, client)
+				.getResultList();
+		
 	}
 
 }

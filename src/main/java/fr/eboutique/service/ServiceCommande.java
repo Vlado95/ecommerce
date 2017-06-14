@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import fr.eboutique.dao.IDao;
 import fr.eboutique.dao.IDaoCommande;
+import fr.eboutique.metier.Client;
 import fr.eboutique.metier.Commande;
 import fr.eboutique.metier.LigneCommande;
 
@@ -50,9 +51,9 @@ public class ServiceCommande implements IServiceCommande{
 	}
 
 	@Override
-	public Commande enregistrerCommande(Commande commande, List<LigneCommande> lcmds) {
+	public List<Commande> rechercheCommandaClient(Integer idClient) {
 		
-		return daoCommande.enregistrerCommande(commande, lcmds);
+		return daoCommande.rechercheCommandaClient(idClient);
 	}
 
 	

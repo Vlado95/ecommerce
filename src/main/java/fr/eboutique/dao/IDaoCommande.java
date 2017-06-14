@@ -9,6 +9,6 @@ import fr.eboutique.metier.LigneCommande;
 public interface IDaoCommande extends IDao<Commande> {
 	
 	
-	public Commande enregistrerCommande(Commande commande,List<LigneCommande> lcmds);
+	public List<Commande> rechercheCommandaClient(Integer idClientt);
 
 }

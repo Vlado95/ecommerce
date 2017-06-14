@@ -17,6 +17,7 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.eboutique.metier.Client;
 import fr.eboutique.metier.Commande;
 import fr.eboutique.metier.LigneCommande;
 import fr.eboutique.service.IServiceCommande;
@@ -102,21 +103,10 @@ public class ServiceCommandeRest implements IServiceCommandeRest{
 
 
 	@Override
-	@POST
-	@Path("client/")
-	public Response enregistrerCommande(Commande commande, List<LigneCommande> lcmds) {
-		try {
-			   for(LigneCommande lcmd : lcmds){
-				   System.out.println("ligne commande à ajouter: "+lcmd);
-			   }
-			serviceCommande.enregistrerCommande(commande, lcmds);
-			return Response.status(Status.OK).entity(commande)
-					.build();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return Response.status(Status.NOT_FOUND).build();
-			// return Response.status(Status.BAD_REQUEST).build();
-		}
+	@GET
+	@Path("/client/{id}")
+	public List<Commande> rechercheCommandeClient(@PathParam("id")  Integer idClient) {
+		// TODO Auto-generated method stub
+		return  serviceCommande.rechercheCommandaClient(idClient);
 	}
 }
